@@ -1,0 +1,15 @@
+{
+    "name": "type-detect"
+  , "repo": "chaijs/type-detect"
+  , "version": "0.0.0"
+  , "description": "Improved typeof detection for node.js and the browser."
+  , "license": "MIT"
+  , "keywords": [
+    ]
+  , "main": "lib/type.js"
+  , "scripts": [
+        "lib/type.js"
+    ]
+  , "dependencies": {}
+  , "development": {}
+}

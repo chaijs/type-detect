@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Browser Tests (type-detect)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../../node_modules/mocha/mocha.css" />
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script>
+      mocha.setup('bdd')
+      var should = chai.should();
+    </script>
+    <script src="../../build/build.js"></script>
+    <script>
+      type = require('type-detect');
+    </script>
+    <!-- <script src="../test.js"></script> -->
+    <script>onload = function () {
+      if (window.mochaPhantomJS) mochaPhantomJS.run()
+      else mocha.run();
+    }
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>
