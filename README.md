@@ -1,4 +1,4 @@
-# type-detect
+# type-detect [![Build Status](https://travis-ci.org/chaijs/type-detect.png?branch=master)](https://travis-ci.org/chaijs/type-detect) [![Coverage Status](https://coveralls.io/repos/chaijs/type-detect/badge.png?branch=master)](https://coveralls.io/r/chaijs/type-detect?branch=master)
 
 > Improved typeof detection for node.js and the browser.
 
