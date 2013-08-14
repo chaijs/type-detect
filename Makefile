@@ -44,7 +44,7 @@ components: component.json
 
 lib-cov:
 	@rm -rf lib-cov
-	@jscoverage lib lib-cov
+	@./node_modules/.bin/jscoverage lib lib-cov
 
 #
 # Clean up

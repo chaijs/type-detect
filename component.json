@@ -11,5 +11,7 @@
         "lib/type.js"
     ]
   , "dependencies": {}
-  , "development": {}
+  , "development": {
+        "chaijs/simple-assert": "*"
+    }
 }

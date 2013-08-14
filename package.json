@@ -20,9 +20,12 @@
   , "dependencies": {
     }
   , "devDependencies": {
-        "chai": "*"
-      , "component": "*"
+        "component": "*"
+      , "coveralls": "2.0.16"
+      , "jscoverage": "0.3.7"
       , "mocha": "*"
+      , "mocha-lcov-reporter": "0.0.1"
       , "mocha-phantomjs": "*"
+      , "simple-assert": "*"
     }
 }
