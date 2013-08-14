@@ -28,6 +28,14 @@ test-cov: lib-cov
 		$(TESTS) \
 		> coverage.html
 
+test-travisci: test-node test-browser lib-cov
+	@echo TRAVIS_JOB_ID $(TRAVIS_JOB_ID)
+	@type_COV=1 NODE_ENV=test ./node_modules/.bin/mocha \
+		--require ./test/bootstrap \
+		--reporter mocha-lcov-reporter \
+		$(TESTS) \
+		| ./node_modules/coveralls/bin/coveralls.js
+
 #
 # Components
 # 
