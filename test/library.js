@@ -48,11 +48,15 @@ describe('new Library', function () {
 
   it('should throw when test not defined', function () {
     var lib = new type.Library;
+    var thrown = false;
     try {
       lib.test(true, 'bln');
     } catch (ex) {
+      thrown = true;
       assert(ex);
       assert(ex instanceof ReferenceError);
     }
+
+    assert(thrown);
   });
 });
