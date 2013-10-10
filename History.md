@@ -1,4 +1,10 @@
 
+0.1.1 / 2013-10-10 
+==================
+
+ * Merge pull request #2 from strongloop/fix-browserify
+ * index,test: support browserify
+
 0.1.0 / 2013-08-14 
 ==================
 
