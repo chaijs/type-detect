@@ -1,2 +1,4 @@
 global.assert = require('simple-assert');
-global.type = require('../..');
+global.type = process.env.type_COV
+  ? require('../../lib-cov/type')
+  : require('../../lib/type');
