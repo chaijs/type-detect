@@ -1,6 +1,6 @@
 {
     "name": "type-detect"
-  , "version": "0.1.1"
+  , "version": "0.1.2"
   , "description": "Improved typeof detection for node.js and the browser."
   , "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)"
   , "license": "MIT"
