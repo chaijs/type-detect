@@ -57,97 +57,92 @@ describe('type(obj)', function () {
     assert('object' === type(new String('hello')));
   });
 
-  describe('ECMA6 Types', function () {
+  describe('New ECMA6 Types', function () {
     it('map', function () {
-      stubToString('[object Map]');
+      stubToStringMethod('[object Map]');
       assert('map' === type({}));
     });
 
     it('weakmap', function () {
-      stubToString('[object WeakMap]');
+      stubToStringMethod('[object WeakMap]');
       assert('weakmap' === type({}));
     });
 
     it('set', function () {
-      stubToString('[object Set]');
+      stubToStringMethod('[object Set]');
       assert('set' === type({}));
     });
 
     it('weakset', function () {
-      stubToString('[object WeakSet]');
+      stubToStringMethod('[object WeakSet]');
       assert('weakset' === type({}));
     });
 
     it('symbol', function () {
-      stubToString('[object Symbol]');
+      stubToStringMethod('[object Symbol]');
       assert('symbol' === type({}));
     });
 
     it('promise', function () {
-      stubToString('[object Promise]');
+      stubToStringMethod('[object Promise]');
       assert('promise' === type({}));
     });
 
     it('int8array', function () {
-      stubToString('[object Int8Array]');
+      stubToStringMethod('[object Int8Array]');
       assert('int8array' === type({}));
     });
 
     it('uint8array', function () {
-      stubToString('[object Uint8Array]');
+      stubToStringMethod('[object Uint8Array]');
       assert('uint8array' === type({}));
     });
 
     it('uint8clampedarray', function () {
-      stubToString('[object Uint8ClampedArray]');
+      stubToStringMethod('[object Uint8ClampedArray]');
       assert('uint8clampedarray' === type({}));
     });
 
     it('int16array', function () {
-      stubToString('[object Int16Array]');
+      stubToStringMethod('[object Int16Array]');
       assert('int16array' === type({}));
     });
 
     it('uint16array', function () {
-      stubToString('[object Uint16Array]');
+      stubToStringMethod('[object Uint16Array]');
       assert('uint16array' === type({}));
     });
 
     it('int32array', function () {
-      stubToString('[object Int32Array]');
+      stubToStringMethod('[object Int32Array]');
       assert('int32array' === type({}));
     });
 
     it('uint32array', function () {
-      stubToString('[object Uint32Array]');
+      stubToStringMethod('[object Uint32Array]');
       assert('uint32array' === type({}));
     });
 
     it('float32array', function () {
-      stubToString('[object Float32Array]');
+      stubToStringMethod('[object Float32Array]');
       assert('float32array' === type({}));
     });
 
     it('float64array', function () {
-      stubToString('[object Float64Array]');
+      stubToStringMethod('[object Float64Array]');
       assert('float64array' === type({}));
     });
 
     it('dataview', function () {
-      stubToString('[object DataView]');
+      stubToStringMethod('[object DataView]');
       assert('dataview' === type({}));
     });
 
-    var originalObjectToString;
-    beforeEach(function () {
-      originalObjectToString = Object.prototype.toString;
-    });
-    afterEach(function () {
-      Object.prototype.toString = originalObjectToString;
-    });
+    var originalObjectToString = Object.prototype.toString;
 
-    function stubToString(staticValue) {
+    function stubToStringMethod(staticValue) {
       Object.prototype.toString = function () {
+        Object.prototype.toString = originalObjectToString;
         return staticValue;
       };
     }
