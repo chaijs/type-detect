@@ -10,8 +10,7 @@ describe('type(obj)', function () {
   });
 
   it('function', function () {
-    assert('function' === type(function () {
-    }));
+    assert('function' === type(function () {}));
   });
 
   it('arguments', function () {
@@ -48,8 +47,7 @@ describe('type(obj)', function () {
   });
 
   it('object', function () {
-    var Noop = function () {
-    };
+    var Noop = function () {};
     assert('object' === type({}));
     assert('object' !== type(Noop));
     assert('object' === type(new Noop));
