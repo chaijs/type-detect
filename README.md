@@ -124,7 +124,7 @@ assert('float64array' === type(new Float64Array()));
 assert('dataview' === type(new DataView(arrayBuffer)));
 ```
 
-If you use `Symbol.toStringTag` to change an Objects return value of the `toString()` Method, `type` will return tis value, e.g:
+If you use `Symbol.toStringTag` to change an Objects return value of the `toString()` Method, `type()` will return this value, e.g:
 ```js
 var myObject = {};
 myObject[Symbol.toStringTag] = 'myCustomType';
