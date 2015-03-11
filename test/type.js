@@ -138,6 +138,11 @@ describe('type(obj)', function () {
       assert('dataview' === type({}));
     });
 
+    it('arraybuffer', function () {
+      stubObjectToStringOnce('[object ArrayBuffer]');
+      assert('arraybuffer' === type({}));
+    });
+
     var originalObjectToString = Object.prototype.toString;
 
     function stubObjectToStringOnce(staticValue) {
