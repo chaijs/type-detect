@@ -105,8 +105,8 @@ assert('object' === type(new String('hello')));
 
 #### ECMA6 Types
 Supports all ECMA6 Types:
-```
-assert('map' === type(new Map());
+```js
+asert('map' === type(new Map());
 assert('weakmap' === type(new WeakMap()));
 assert('set' === type(new Set()));
 assert('weakset' === type(new WeakSet()));
@@ -122,6 +122,13 @@ assert('uint32array' === type(new UInt32Array()));
 assert('float32array' === type(new Float32Array()));
 assert('float64array' === type(new Float64Array()));
 assert('dataview' === type(new DataView(arrayBuffer)));
+```
+
+If you use `Symbol.toStringTag` to change an Objects return value of the `toString()` Method, `type` will return tis value, e.g:
+```js
+var myObject = {};
+myObject[Symbol.toStringTag] = 'myCustomType';
+assert('myCustomType' === type(myObject);
 ```
 
 ### Library
