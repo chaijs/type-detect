@@ -114,13 +114,14 @@ assert('symbol' === type(Symbol()));
 assert('promise' === type(new Promise(callback));
 assert('int8array' === type(new Int8Array()));
 assert('uint8array' === type(new Uint8Array()));
-assert('uint8clampedarray' === type(UInt8ClampedArray()));
+assert('uint8clampedarray' === type(new UInt8ClampedArray()));
 assert('int16array' === type(new Int16Array()));
 assert('uint16array' === type(new Uint16Array()));
 assert('int32array' === type(new Int32Array()));
 assert('uint32array' === type(new UInt32Array()));
 assert('float32array' === type(new Float32Array()));
 assert('float64array' === type(new Float64Array()));
+assert('arraybuffer' === type(new ArrayBuffer()));
 assert('dataview' === type(new DataView(arrayBuffer)));
 ```
 
