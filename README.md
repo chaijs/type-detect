@@ -103,6 +103,27 @@ assert('object' === type(new Object));
 assert('object' === type(new String('hello')));
 ```
 
+#### ECMA6 Types
+Supports all ECMA6 Types:
+```
+assert('map' === type(new Map());
+assert('weakmap' === type(new WeakMap()));
+assert('set' === type(new Set()));
+assert('weakset' === type(new WeakSet()));
+assert('symbol' === type(Symbol()));
+assert('promise' === type(new Promise(callback));
+assert('int8array' === type(new Int8Array()));
+assert('uint8array' === type(new Uint8Array()));
+assert('uint8clampedarray' === type(UInt8ClampedArray()));
+assert('int16array' === type(new Int16Array()));
+assert('uint16array' === type(new Uint16Array()));
+assert('int32array' === type(new Int32Array()));
+assert('uint32array' === type(new UInt32Array()));
+assert('float32array' === type(new Float32Array()));
+assert('float64array' === type(new Float64Array()));
+assert('dataview' === type(new DataView(arrayBuffer)));
+```
+
 ### Library
 
 A `Library` is a small constructed repository for custom type detections.
