@@ -55,7 +55,16 @@ describe('type(obj)', function () {
     assert('object' === type(new String('hello')));
   });
 
-  describe('New ECMA6 Types', function () {
+  describe('New ECMA6 Types Stubbed', function () {
+    var originalObjectToString = Object.prototype.toString;
+
+    function stubObjectToStringOnce(staticValue) {
+      Object.prototype.toString = function () {
+        Object.prototype.toString = originalObjectToString;
+        return staticValue;
+      };
+    }
+
     it('map', function () {
       stubObjectToStringOnce('[object Map]');
       assert('map' === type({}));
@@ -140,14 +149,104 @@ describe('type(obj)', function () {
       stubObjectToStringOnce('[object ArrayBuffer]');
       assert('arraybuffer' === type({}));
     });
-
-    var originalObjectToString = Object.prototype.toString;
-
-    function stubObjectToStringOnce(staticValue) {
-      Object.prototype.toString = function () {
-        Object.prototype.toString = originalObjectToString;
-        return staticValue;
-      };
-    }
   });
+
+  describe('New ECMA6 Types Conditional', function () {
+    if (typeof Map === 'function') {
+      it('map', function () {
+        assert('map' === type(new Map()));
+      });
+    }
+
+    if (typeof WeakMap === 'function') {
+      it('weakmap', function () {
+        assert('weakmap' === type(new WeakMap()));
+      });
+    }
+
+    if (typeof Set === 'function') {
+      it('set', function () {
+        assert('set' === type(new Set()));
+      });
+    }
+
+    if (typeof WeakSet === 'function') {
+      it('weakset', function () {
+        assert('weakset' === type(new WeakSet()));
+      });
+    }
+
+    if (typeof Symbol === 'function') {
+      it('symbol', function () {
+        assert('symbol' === type(Symbol()));
+      });
+    }
+
+    if (typeof Int8Array === 'function') {
+      it('int8array', function () {
+        assert('int8array' === type(new Int8Array()));
+      });
+    }
+
+    if (typeof Uint8Array === 'function') {
+      it('uint8array', function () {
+        assert('uint8array' === type(new Uint8Array()));
+      });
+    }
+
+    if (typeof Uint8ClampedArray === 'function') {
+      it('uint8clampedarray', function () {
+        assert('uint8clampedarray' === type(new Uint8ClampedArray()));
+      });
+    }
+
+    if (typeof Int16Array === 'function') {
+      it('int16array', function () {
+        assert('int16array' === type(new Int16Array()));
+      });
+    }
+
+    if (typeof Uint16Array === 'function') {
+      it('uint16array', function () {
+        assert('uint16array' === type(new Uint16Array()));
+      });
+    }
+
+    if (typeof Int32Array === 'function') {
+      it('int32array', function () {
+        assert('int32array' === type(new Int32Array()));
+      });
+    }
+
+    if (typeof Uint32Array === 'function') {
+      it('uint32array', function () {
+        assert('uint32array' === type(new Uint32Array()));
+      });
+    }
+
+    if (typeof Float32Array === 'function') {
+      it('float32array', function () {
+        assert('float32array' === type(new Float32Array()));
+      });
+    }
+
+    if (typeof Float64Array === 'function') {
+      it('float64array', function () {
+        assert('float64array' === type(new Float64Array()));
+      });
+    }
+
+    if (typeof DataView === 'function') {
+      it('dataview', function () {
+        var arrayBuffer = new ArrayBuffer();
+        assert('dataview' === type(new DataView(arrayBuffer)));
+      });
+    }
+
+    if (typeof ArrayBuffer === 'function') {
+      it('arraybuffer', function () {
+        assert('arraybuffer' === type(new ArrayBuffer()));
+      });
+    }
+  })
 });
