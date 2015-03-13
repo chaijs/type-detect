@@ -182,6 +182,13 @@ describe('type(obj)', function () {
       });
     }
 
+    if (typeof Promise === 'function') {
+      it('promise', function () {
+        var noop = function () {};
+        assert('promise' === type(new Promise(noop)));
+      });
+    }
+
     if (typeof Int8Array === 'function') {
       it('int8array', function () {
         assert('int8array' === type(new Int8Array()));
@@ -238,14 +245,14 @@ describe('type(obj)', function () {
 
     if (typeof DataView === 'function') {
       it('dataview', function () {
-        var arrayBuffer = new ArrayBuffer();
+        var arrayBuffer = new ArrayBuffer(1);
         assert('dataview' === type(new DataView(arrayBuffer)));
       });
     }
 
     if (typeof ArrayBuffer === 'function') {
       it('arraybuffer', function () {
-        assert('arraybuffer' === type(new ArrayBuffer()));
+        assert('arraybuffer' === type(new ArrayBuffer(1)));
       });
     }
   })
