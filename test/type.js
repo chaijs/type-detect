@@ -30,10 +30,12 @@ describe('type(obj)', function () {
     assert('number' === type(-1.234));
     assert('number' === type(Infinity));
     assert('number' === type(NaN));
+    assert('number' === type(new Number(2)));
   });
 
   it('string', function () {
     assert('string' === type('hello world'));
+    assert('string' === type(new String('hello')));
   });
 
   it('null', function () {
@@ -52,7 +54,6 @@ describe('type(obj)', function () {
     assert('object' !== type(Noop));
     assert('object' === type(new Noop));
     assert('object' === type(new Object));
-    assert('object' === type(new String('hello')));
   });
 
   describe('New ECMA6 Types Stubbed', function () {
