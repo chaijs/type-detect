@@ -70,12 +70,14 @@ assert(type(-1) === 'number');
 assert(type(-1.234) === 'number');
 assert(type(Infinity) === 'number');
 assert(type(NaN) === 'number');
+assert(type(new Number(1)) === 'number');
 ```
 
 #### string
 
 ```js
 assert(type('hello world') === 'string');
+assert(type(new String('hello')) === 'object');
 ```
 
 #### null
@@ -100,7 +102,6 @@ assert(type({}) === 'object');
 assert(type(Noop) !== 'object');
 assert(type(new Noop) === 'object');
 assert(type(new Object) === 'object');
-assert(type(new String('hello')) === 'object');
 ```
 
 #### ECMA6 Types
