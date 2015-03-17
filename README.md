@@ -77,7 +77,7 @@ assert(type(new Number(1)) === 'number');
 
 ```js
 assert(type('hello world') === 'string');
-assert(type(new String('hello')) === 'object');
+assert(type(new String('hello')) === 'string');
 ```
 
 #### null
