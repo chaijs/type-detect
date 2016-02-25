@@ -16,4 +16,4 @@ components
 node_modules
 npm-debug.log
 
-coverage.html
+type-detect.js

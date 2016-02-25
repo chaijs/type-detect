@@ -11,7 +11,9 @@
     "url": "git@github.com:chaijs/type-detect.git"
   },
   "scripts": {
+    "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
     "lint": "eslint --ignore-path .gitignore .",
+    "prepublish": "npm run build",
     "pretest": "echo disabled for now; exit 0; npm run lint",
     "test": "npm run test:node-cover && npm run test:browser",
     "test:browser": "karma start --singleRun=true",
@@ -28,6 +30,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "browserify": "^13.0.0",
     "component": "*",
     "coveralls": "2.11.8",
     "eslint": "^2.4.0",
