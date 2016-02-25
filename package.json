@@ -1,6 +1,5 @@
 {
   "name": "type-detect",
-  "version": "1.0.0",
   "description": "Improved typeof detection for node.js and the browser.",
   "keywords": [
     "type",
@@ -17,17 +16,23 @@
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:chaijs/type-detect.git"
+    "url": "git+ssh://git@github.com/chaijs/type-detect.git"
   },
   "scripts": {
     "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
     "lint": "eslint --ignore-path .gitignore .",
     "prepublish": "npm run build",
-    "pretest": "echo disabled for now; exit 0; npm run lint",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "pretest": "npm run lint",
     "test": "npm run test:node-cover && npm run test:browser",
     "test:browser": "karma start --singleRun=true",
     "test:node": "mocha",
     "test:node-cover": "mocha"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +50,7 @@
     "eslint": "^2.4.0",
     "eslint-config-strict": "^8.5.0",
     "eslint-plugin-filenames": "^0.2.0",
+    "ghooks": "^1.0.1",
     "jscoverage": "0.3.7",
     "karma": "^0.13.22",
     "karma-browserify": "^5.0.2",
@@ -54,7 +60,9 @@
     "karma-sauce-launcher": "^0.3.1",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.5",
-    "simple-assert": "*"
+    "semantic-release": "^4.3.5",
+    "simple-assert": "^1.0.0",
+    "validate-commit-msg": "^2.3.1"
   },
   "engines": {
     "node": "*"
