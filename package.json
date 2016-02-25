@@ -45,7 +45,6 @@
   "dependencies": {},
   "devDependencies": {
     "browserify": "^13.0.0",
-    "component": "*",
     "coveralls": "2.11.8",
     "eslint": "^2.4.0",
     "eslint-config-strict": "^8.5.0",

@@ -10,12 +10,6 @@
 
     $ npm install type-detect
 
-### Component
-
-`type-detect` is available as a [component](https://github.com/component/component).
-
-    $ component install chaijs/type-detect
-
 ## Usage
 
 ### Primary
