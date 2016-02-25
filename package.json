@@ -1,29 +1,42 @@
 {
-    "name": "type-detect",
-    "version": "1.0.0",
-    "description": "Improved typeof detection for node.js and the browser.",
-    "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
-    "license": "MIT",
-    "keywords": [],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:chaijs/type-detect.git"
-    },
-    "engines": {
-        "node": "*"
-    },
-    "main": "./index",
-    "scripts": {
-        "test": "make test"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "component": "*",
-        "coveralls": "2.11.8",
-        "jscoverage": "0.3.7",
-        "mocha": "*",
-        "mocha-lcov-reporter": "0.0.1",
-        "mocha-phantomjs": "*",
-        "simple-assert": "*"
+  "name": "type-detect",
+  "version": "1.0.0",
+  "description": "Improved typeof detection for node.js and the browser.",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
+  "main": "./index",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:chaijs/type-detect.git"
+  },
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "pretest": "echo disabled for now; exit 0; npm run lint",
+    "test": "make test"
+  },
+  "eslintConfig": {
+    "extends": [
+      "strict/es5"
+    ],
+    "rules": {
+      "complexity": 0
     }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "component": "*",
+    "coveralls": "2.11.8",
+    "eslint": "^2.4.0",
+    "eslint-config-strict": "^8.5.0",
+    "eslint-plugin-filenames": "^0.2.0",
+    "jscoverage": "0.3.7",
+    "mocha": "*",
+    "mocha-lcov-reporter": "0.0.1",
+    "mocha-phantomjs": "*",
+    "simple-assert": "*"
+  },
+  "engines": {
+    "node": "*"
+  }
 }
