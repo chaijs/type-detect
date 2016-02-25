@@ -1,6 +1,8 @@
 language: node_js
 node_js:
-- 0.1
+ - 0.1
+ - 4.3
+ - stable
 script: make test-travisci
 env:
   global:
