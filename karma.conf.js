@@ -1,6 +1,7 @@
 'use strict';
 var packageJson = require('./package.json');
 var defaultTimeout = 120000;
+var browserifyIstanbul = require('browserify-istanbul');
 module.exports = function configureKarma(config) {
   var localBrowsers = [
     'PhantomJS',
@@ -50,11 +51,14 @@ module.exports = function configureKarma(config) {
     browserify: {
       debug: true,
       bare: true,
+      transform: [
+        browserifyIstanbul({ ignore: [ '**/node_modules/**', '**/test/**' ] }),
+      ],
     },
     reporters: [ 'progress', 'coverage' ],
     coverageReporter: {
       type: 'lcov',
-      dir: 'test/coverage',
+      dir: 'coverage',
     },
     port: 9876,
     colors: true,
