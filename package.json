@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
+    "bench": "node bench",
     "lint": "eslint --ignore-path .gitignore .",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
@@ -51,6 +52,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "benchmark": "^2.1.0",
     "browserify": "^13.0.0",
     "browserify-istanbul": "^1.0.0",
     "coveralls": "2.11.8",
