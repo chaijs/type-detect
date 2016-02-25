@@ -38,8 +38,15 @@
     "extends": [
       "strict/es5"
     ],
+    "env": {
+      "es6": true
+    },
+    "globals": {
+      "HTMLElement": false
+    },
     "rules": {
-      "complexity": 0
+      "complexity": 0,
+      "max-statements": 0
     }
   },
   "dependencies": {},

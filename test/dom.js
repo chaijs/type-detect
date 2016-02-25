@@ -14,7 +14,7 @@ describeIf(typeof window !== 'undefined' && typeof window.document !== 'undefine
   });
 
   it('document', function () {
-    assert(type(document) === 'htmldocument');
+    assert(type(document) === 'document');
   });
 
   it('domparser', function () {
