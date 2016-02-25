@@ -2,10 +2,19 @@
   "name": "type-detect",
   "version": "1.0.0",
   "description": "Improved typeof detection for node.js and the browser.",
-  "keywords": [],
+  "keywords": [
+    "type",
+    "typeof",
+    "types"
+  ],
   "license": "MIT",
   "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
-  "main": "./index",
+  "contributors": [
+    "David Losert (https://github.com/davelosert)",
+    "Keith Cirkel (https://github.com/keithamus)",
+    "Miroslav Bajtoš (https://github.com/bajtos)"
+  ],
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:chaijs/type-detect.git"
