@@ -5,12 +5,16 @@
  * MIT Licensed
  */
 var getPrototypeOfExists = typeof Object.getPrototypeOf === 'function';
+var promiseExists = typeof Promise === 'function';
 var globalObject = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : self; // eslint-disable-line
 var isDom = 'location' in globalObject && 'document' in globalObject;
 var htmlElementExists = typeof HTMLElement !== 'undefined';
+var isArrayExists = typeof Array.isArray === 'function';
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
 var setExists = typeof Set !== 'undefined';
+var weakMapExists = typeof WeakMap !== 'undefined';
+var weakSetExists = typeof WeakSet !== 'undefined';
 var dataViewExists = typeof DataView !== 'undefined';
 var symbolIteratorExists = symbolExists && Symbol.iterator;
 var setEntriesExists = setExists && typeof Set.prototype.entries === 'function';
@@ -34,24 +38,63 @@ var toStringRightSliceLength = -1;
  * @api public
  */
 module.exports = function typeDetect(obj) {
-  /* ! Spec Conformance
-   * ES5$15.2.4.2 (ES6$19.1.3.6) - Object.prototype.toString returns "[object Null]" for null object
-   * Test: `Object.prototype.toString.call(null)``
-   *  - PhantomJS 1.x == "[object DOMWindow]" (https://github.com/ariya/phantomjs/issues/13617)
-   *  - IE <=8  == "[object Object]"
-  */
+  /* ! Speed optimisation
+   * Pre:
+   *   string literal     x 3,039,035 ops/sec ±1.62% (78 runs sampled)
+   *   boolean literal    x 1,424,138 ops/sec ±4.54% (75 runs sampled)
+   *   number literal     x 1,653,153 ops/sec ±1.91% (82 runs sampled)
+   *   undefined          x 9,978,660 ops/sec ±1.92% (75 runs sampled)
+   *   function           x 2,556,769 ops/sec ±1.73% (77 runs sampled)
+   * Post:
+   *   string literal     x 38,564,796 ops/sec ±1.15% (79 runs sampled)
+   *   boolean literal    x 31,148,940 ops/sec ±1.10% (79 runs sampled)
+   *   number literal     x 32,679,330 ops/sec ±1.90% (78 runs sampled)
+   *   undefined          x 32,363,368 ops/sec ±1.07% (82 runs sampled)
+   *   function           x 31,296,870 ops/sec ±0.96% (83 runs sampled)
+   */
+  var typeofObj = typeof obj;
+  if (typeofObj !== 'object') {
+    return typeofObj;
+  }
+
+  /* ! Speed optimisation
+   * Pre:
+   *   null               x 28,645,765 ops/sec ±1.17% (82 runs sampled)
+   * Post:
+   *   null               x 36,428,962 ops/sec ±1.37% (84 runs sampled)
+   */
   if (obj === null) {
     return 'null';
   }
 
   /* ! Spec Conformance
-   * ES5$15.2.4.2 (ES6$19.1.3.6) - Object.prototype.toString returns "[object Undefined]" for undefined object
-   * Test: `Object.prototype.toString.call(undefined)``
-   *  - PhantomJS 1.x == "[object DOMWindow]" (https://github.com/ariya/phantomjs/issues/11722)
-   *  - IE <=8  == "[object Object]"
+   * Test: `Object.prototype.toString.call(window)``
+   *  - Node === "[object global]"
+   *  - Chrome === "[object global]"
+   *  - Firefox === "[object Window]"
+   *  - PhantomJS === "[object Window]"
+   *  - Safari === "[object Window]"
+   *  - IE 11 === "[object Window]"
+   *  - IE Edge === "[object Window]"
+   * Test: `Object.prototype.toString.call(this)``
+   *  - Chrome Worker === "[object global]"
+   *  - Firefox Worker === "[object DedicatedWorkerGlobalScope]"
+   *  - Safari Worker === "[object DedicatedWorkerGlobalScope]"
+   *  - IE 11 Worker === "[object WorkerGlobalScope]"
+   *  - IE Edge Worker === "[object WorkerGlobalScope]"
    */
-  if (obj === undefined) { // eslint-disable-line no-undefined
-    return 'undefined';
+  if (obj === globalObject) {
+    return 'global';
+  }
+
+  /* ! Speed optimisation
+   * Pre:
+   *   array literal      x 2,888,352 ops/sec ±0.67% (82 runs sampled)
+   * Post:
+   *   array literal      x 22,479,650 ops/sec ±0.96% (81 runs sampled)
+   */
+  if (isArrayExists && Array.isArray(obj)) {
+    return 'array';
   }
 
   if (isDom) {
@@ -154,6 +197,81 @@ module.exports = function typeDetect(obj) {
 
   if (getPrototypeOfExists && (symbolExists === false || typeof obj[Symbol.toStringTag] === 'undefined')) {
     var objPrototype = Object.getPrototypeOf(obj);
+    /* ! Speed optimisation
+    * Pre:
+    *   regex literal      x 1,772,385 ops/sec ±1.85% (77 runs sampled)
+    *   regex constructor  x 2,143,634 ops/sec ±2.46% (78 runs sampled)
+    * Post:
+    *   regex literal      x 3,928,009 ops/sec ±0.65% (78 runs sampled)
+    *   regex constructor  x 3,931,108 ops/sec ±0.58% (84 runs sampled)
+    */
+    if (objPrototype === RegExp.prototype) {
+      return 'regexp';
+    }
+
+    /* ! Speed optimisation
+    * Pre:
+    *   date               x 2,130,074 ops/sec ±4.42% (68 runs sampled)
+    * Post:
+    *   date               x 3,953,779 ops/sec ±1.35% (77 runs sampled)
+    */
+    if (objPrototype === Date.prototype) {
+      return 'date';
+    }
+
+    /* ! Spec Conformance
+     * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-promise.prototype-@@tostringtag)
+     * ES6$25.4.5.4 - Promise.prototype[@@toStringTag] should be "Promise":
+     * Test: `Object.prototype.toString.call(Promise.resolve())``
+     *  - Chrome <=47 === "[object Object]"
+     *  - Edge <=20 === "[object Object]"
+     *  - Firefox 29-Latest === "[object Promise]"
+     *  - Safari 7.1-Latest === "[object Promise]"
+     */
+    if (promiseExists && objPrototype === Promise.prototype) {
+      return 'promise';
+    }
+
+    /* ! Speed optimisation
+    * Pre:
+    *   set                x 2,222,186 ops/sec ±1.31% (82 runs sampled)
+    * Post:
+    *   set                x 4,545,879 ops/sec ±1.13% (83 runs sampled)
+    */
+    if (setExists && objPrototype === Set.prototype) {
+      return 'set';
+    }
+
+    /* ! Speed optimisation
+    * Pre:
+    *   map                x 2,396,842 ops/sec ±1.59% (81 runs sampled)
+    * Post:
+    *   map                x 4,183,945 ops/sec ±6.59% (82 runs sampled)
+    */
+    if (mapExists && objPrototype === Map.prototype) {
+      return 'map';
+    }
+
+    /* ! Speed optimisation
+    * Pre:
+    *   weakset            x 1,323,220 ops/sec ±2.17% (76 runs sampled)
+    * Post:
+    *   weakset            x 4,237,510 ops/sec ±2.01% (77 runs sampled)
+    */
+    if (weakSetExists && objPrototype === WeakSet.prototype) {
+      return 'weakset';
+    }
+
+    /* ! Speed optimisation
+    * Pre:
+    *   weakmap            x 1,500,260 ops/sec ±2.02% (78 runs sampled)
+    * Post:
+    *   weakmap            x 3,881,384 ops/sec ±1.45% (82 runs sampled)
+    */
+    if (weakMapExists && objPrototype === WeakMap.prototype) {
+      return 'weakmap';
+    }
+
     /* ! Spec Conformance
      * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-dataview.prototype-@@tostringtag)
      * ES6$24.2.4.21 - DataView.prototype[@@toStringTag] should be "DataView":
@@ -202,6 +320,16 @@ module.exports = function typeDetect(obj) {
      */
     if (stringIteratorExists && objPrototype === stringIteratorPrototype) {
       return 'string iterator';
+    }
+
+    /* ! Speed optimisation
+    * Pre:
+    *   object from null   x 2,424,320 ops/sec ±1.67% (76 runs sampled)
+    * Post:
+    *   object from null   x 5,838,000 ops/sec ±0.99% (84 runs sampled)
+    */
+    if (objPrototype === null) {
+      return 'object';
     }
   }
 
