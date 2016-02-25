@@ -56,6 +56,8 @@ describe('Generic', function () {
     assert(type(Noop) !== 'object');
     assert(type(new Noop()) === 'object');
     assert(type(new Object()) === 'object');
+    assert(type(Object.create(null)) === 'object');
+    assert(type(Object.create(Object.prototype)) === 'object');
   });
 
   it('boolean', function () {
@@ -87,127 +89,161 @@ describe('Generic', function () {
   describe('Stubbed ES2015 Types', function () {
     var originalObjectToString = Object.prototype.toString;
     function stubObjectToStringOnce(staticValue) {
-      /* eslint-disable no-extend-native */
-      Object.prototype.toString = function () {
-        Object.prototype.toString = originalObjectToString;
+      Object.prototype.toString = function () {  // eslint-disable-line no-extend-native
+        Object.prototype.toString = originalObjectToString;  // eslint-disable-line no-extend-native
         return staticValue;
       };
-      /* eslint-enable no-extend-native */
     }
+    function Thing() {}
 
     it('map', function () {
       stubObjectToStringOnce('[object Map]');
-      assert(type({}) === 'map');
+      assert(type(new Thing()) === 'map');
     });
 
     it('weakmap', function () {
       stubObjectToStringOnce('[object WeakMap]');
-      assert(type({}) === 'weakmap');
+      assert(type(new Thing()) === 'weakmap');
     });
 
     it('set', function () {
       stubObjectToStringOnce('[object Set]');
-      assert(type({}) === 'set');
+      assert(type(new Thing()) === 'set');
     });
 
     it('weakset', function () {
       stubObjectToStringOnce('[object WeakSet]');
-      assert(type({}) === 'weakset');
+      assert(type(new Thing()) === 'weakset');
     });
 
     it('symbol', function () {
       stubObjectToStringOnce('[object Symbol]');
-      assert(type({}) === 'symbol');
+      assert(type(new Thing()) === 'symbol');
     });
 
     it('promise', function () {
       stubObjectToStringOnce('[object Promise]');
-      assert(type({}) === 'promise');
+      assert(type(new Thing()) === 'promise');
     });
 
     it('int8array', function () {
       stubObjectToStringOnce('[object Int8Array]');
-      assert(type({}) === 'int8array');
+      assert(type(new Thing()) === 'int8array');
     });
 
     it('uint8array', function () {
       stubObjectToStringOnce('[object Uint8Array]');
-      assert(type({}) === 'uint8array');
+      assert(type(new Thing()) === 'uint8array');
     });
 
     it('uint8clampedarray', function () {
       stubObjectToStringOnce('[object Uint8ClampedArray]');
-      assert(type({}) === 'uint8clampedarray');
+      assert(type(new Thing()) === 'uint8clampedarray');
     });
 
     it('int16array', function () {
       stubObjectToStringOnce('[object Int16Array]');
-      assert(type({}) === 'int16array');
+      assert(type(new Thing()) === 'int16array');
     });
 
     it('uint16array', function () {
       stubObjectToStringOnce('[object Uint16Array]');
-      assert(type({}) === 'uint16array');
+      assert(type(new Thing()) === 'uint16array');
     });
 
     it('int32array', function () {
       stubObjectToStringOnce('[object Int32Array]');
-      assert(type({}) === 'int32array');
+      assert(type(new Thing()) === 'int32array');
     });
 
     it('uint32array', function () {
       stubObjectToStringOnce('[object Uint32Array]');
-      assert(type({}) === 'uint32array');
+      assert(type(new Thing()) === 'uint32array');
     });
 
     it('float32array', function () {
       stubObjectToStringOnce('[object Float32Array]');
-      assert(type({}) === 'float32array');
+      assert(type(new Thing()) === 'float32array');
     });
 
     it('float64array', function () {
       stubObjectToStringOnce('[object Float64Array]');
-      assert(type({}) === 'float64array');
+      assert(type(new Thing()) === 'float64array');
     });
 
     it('dataview', function () {
       stubObjectToStringOnce('[object DataView]');
-      assert(type({}) === 'dataview');
+      assert(type(new Thing()) === 'dataview');
     });
 
     it('arraybuffer', function () {
       stubObjectToStringOnce('[object ArrayBuffer]');
-      assert(type({}) === 'arraybuffer');
+      assert(type(new Thing()) === 'arraybuffer');
     });
 
     it('generatorfunction', function () {
       stubObjectToStringOnce('[object GeneratorFunction]');
-      assert(type({}) === 'generatorfunction');
+      assert(type(new Thing()) === 'generatorfunction');
     });
 
     it('generator', function () {
       stubObjectToStringOnce('[object Generator]');
-      assert(type({}) === 'generator');
+      assert(type(new Thing()) === 'generator');
     });
 
     it('string iterator', function () {
       stubObjectToStringOnce('[object String Iterator]');
-      assert(type({}) === 'string iterator');
+      assert(type(new Thing()) === 'string iterator');
     });
 
     it('array iterator', function () {
       stubObjectToStringOnce('[object Array Iterator]');
-      assert(type({}) === 'array iterator');
+      assert(type(new Thing()) === 'array iterator');
     });
 
     it('map iterator', function () {
       stubObjectToStringOnce('[object Map Iterator]');
-      assert(type({}) === 'map iterator');
+      assert(type(new Thing()) === 'map iterator');
     });
 
     it('set iterator', function () {
       stubObjectToStringOnce('[object Set Iterator]');
-      assert(type({}) === 'set iterator');
+      assert(type(new Thing()) === 'set iterator');
+    });
+
+  });
+
+  describe('@@toStringTag Sham', function () {
+    var originalObjectToString = Object.prototype.toString;
+    before(function () {
+      global.Symbol = global.Symbol || {};
+      global.Symbol.toStringTag = global.Symbol.toStringTag || '__@@toStringTag__';
+      var test = {};
+      test[Symbol.toStringTag] = function () {
+        return 'foo';
+      };
+      if (Object.prototype.toString(test) !== '[object foo]') {
+        Object.prototype.toString = function () { // eslint-disable-line no-extend-native
+          if (typeof this === 'object' && typeof this[Symbol.toStringTag] === 'function') {
+            return '[object ' + this[Symbol.toStringTag]() + ']';
+          }
+          return originalObjectToString.call(this);
+        };
+      }
+    });
+
+    after(function () {
+      Object.prototype.toString = originalObjectToString; // eslint-disable-line no-extend-native
+    });
+
+
+    it('plain object', function () {
+      var obj = {
+        '__@@toStringTag__': function () {
+          return 'Foo';
+        },
+      };
+      assert(type(obj) === 'foo');
     });
 
   });

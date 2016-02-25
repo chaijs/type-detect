@@ -1,7 +1,9 @@
 'use strict';
 var assert = require('simple-assert');
 var type = require('..');
-var haveSymbols = typeof Symbol === 'function';
+var symbolExists = typeof Symbol === 'function';
+var setExists = typeof Set === 'function';
+var mapExists = typeof Map === 'function';
 var supportArrows = false;
 var supportGenerators = false;
 try {
@@ -21,19 +23,27 @@ function itIf(condition) {
 }
 
 describe('ES2015 Specific', function () {
-  itIf(haveSymbols && typeof String.prototype[Symbol.iterator] === 'function')('string iterator', function () {
+  itIf(symbolExists && typeof String.prototype[Symbol.iterator] === 'function')('string iterator', function () {
     assert(type(''[Symbol.iterator]()) === 'string iterator');
   });
 
-  itIf(typeof Array.prototype.entries === 'function')('array iterator', function () {
+  itIf(symbolExists && typeof Array.prototype[Symbol.iterator] === 'function')('array iterator', function () {
+    assert(type([][Symbol.iterator]()) === 'array iterator');
+  });
+
+  itIf(typeof Array.prototype.entries === 'function')('array iterator (entries)', function () {
     assert(type([].entries()) === 'array iterator');
   });
 
-  itIf(typeof Map === 'function')('map', function () {
+  itIf(mapExists)('map', function () {
     assert(type(new Map()) === 'map');
   });
 
-  itIf(typeof Map === 'function')('map iterator', function () {
+  itIf(symbolExists && mapExists && typeof Map.prototype[Symbol.iterator] === 'function')('map iterator', function () {
+    assert(type(new Map()[Symbol.iterator]()) === 'map iterator');
+  });
+
+  itIf(mapExists && typeof Map.prototype.entries === 'function')('map iterator (entries)', function () {
     assert(type(new Map().entries()) === 'map iterator');
   });
 
@@ -41,11 +51,15 @@ describe('ES2015 Specific', function () {
     assert(type(new WeakMap()) === 'weakmap');
   });
 
-  itIf(typeof Set === 'function')('set', function () {
+  itIf(setExists)('set', function () {
     assert(type(new Set()) === 'set');
   });
 
-  itIf(typeof Set === 'function')('set iterator', function () {
+  itIf(symbolExists && setExists && typeof Set.prototype[Symbol.iterator] === 'function')('set iterator', function () {
+    assert(type(new Set()[Symbol.iterator]()) === 'set iterator');
+  });
+
+  itIf(setExists && typeof Set.prototype.entries === 'function')('set iterator', function () {
     assert(type(new Set().entries()) === 'set iterator');
   });
 
