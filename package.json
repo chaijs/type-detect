@@ -13,7 +13,10 @@
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "pretest": "echo disabled for now; exit 0; npm run lint",
-    "test": "make test"
+    "test": "npm run test:node-cover && npm run test:browser",
+    "test:browser": "karma start --singleRun=true",
+    "test:node": "mocha",
+    "test:node-cover": "mocha"
   },
   "eslintConfig": {
     "extends": [
@@ -31,15 +34,14 @@
     "eslint-config-strict": "^8.5.0",
     "eslint-plugin-filenames": "^0.2.0",
     "jscoverage": "0.3.7",
-    "karma": "^0.13.21",
+    "karma": "^0.13.22",
     "karma-browserify": "^5.0.2",
-    "karma-coverage": "^0.5.3",
+    "karma-coverage": "^0.5.5",
     "karma-mocha": "^0.2.2",
     "karma-phantomjs-launcher": "^1.0.0",
-    "karma-sauce-launcher": "^0.3.0",
-    "mocha": "*",
-    "mocha-lcov-reporter": "0.0.1",
-    "mocha-phantomjs": "*",
+    "karma-sauce-launcher": "^0.3.1",
+    "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.5",
     "simple-assert": "*"
   },
   "engines": {
