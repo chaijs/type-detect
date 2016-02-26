@@ -13,6 +13,10 @@
     "Keith Cirkel (https://github.com/keithamus)",
     "Miroslav Bajtoš (https://github.com/bajtos)"
   ],
+  "files": [
+    "index.js",
+    "type-detect.js"
+  ],
   "main": "./index.js",
   "repository": {
     "type": "git",
