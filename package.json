@@ -19,8 +19,8 @@
     "url": "git+ssh://git@github.com/chaijs/type-detect.git"
   },
   "scripts": {
-    "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
     "bench": "node bench",
+    "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
     "lint": "eslint --ignore-path .gitignore .",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
@@ -72,6 +72,7 @@
     "phantomjs-prebuilt": "^2.1.5",
     "semantic-release": "^4.3.5",
     "simple-assert": "^1.0.0",
+    "travis-after-all": "^1.4.4",
     "validate-commit-msg": "^2.3.1"
   },
   "engines": {
