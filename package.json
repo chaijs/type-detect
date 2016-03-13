@@ -1,29 +1,85 @@
 {
-    "name": "type-detect",
-    "version": "1.0.0",
-    "description": "Improved typeof detection for node.js and the browser.",
-    "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
-    "license": "MIT",
-    "keywords": [],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:chaijs/type-detect.git"
-    },
-    "engines": {
-        "node": "*"
-    },
-    "main": "./index",
-    "scripts": {
-        "test": "make test"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "component": "*",
-        "coveralls": "2.11.8",
-        "jscoverage": "0.3.7",
-        "mocha": "*",
-        "mocha-lcov-reporter": "0.0.1",
-        "mocha-phantomjs": "*",
-        "simple-assert": "*"
+  "name": "type-detect",
+  "description": "Improved typeof detection for node.js and the browser.",
+  "keywords": [
+    "type",
+    "typeof",
+    "types"
+  ],
+  "license": "MIT",
+  "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
+  "contributors": [
+    "David Losert (https://github.com/davelosert)",
+    "Keith Cirkel (https://github.com/keithamus)",
+    "Miroslav Bajtoš (https://github.com/bajtos)"
+  ],
+  "files": [
+    "index.js",
+    "type-detect.js"
+  ],
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/chaijs/type-detect.git"
+  },
+  "scripts": {
+    "bench": "node bench",
+    "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "prepublish": "npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "pretest": "npm run lint",
+    "test": "npm run test:node && npm run test:browser && npm run upload-coverage",
+    "test:browser": "karma start --singleRun=true",
+    "test:node": "istanbul cover _mocha",
+    "upload-coverage": "lcov-result-merger 'coverage/**/lcov.info' | coveralls; exit 0"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
     }
+  },
+  "eslintConfig": {
+    "extends": [
+      "strict/es5"
+    ],
+    "env": {
+      "es6": true
+    },
+    "globals": {
+      "HTMLElement": false
+    },
+    "rules": {
+      "complexity": 0,
+      "max-statements": 0
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "benchmark": "^2.1.0",
+    "browserify": "^13.0.0",
+    "browserify-istanbul": "^1.0.0",
+    "coveralls": "2.11.8",
+    "eslint": "^2.4.0",
+    "eslint-config-strict": "^8.5.0",
+    "eslint-plugin-filenames": "^0.2.0",
+    "ghooks": "^1.0.1",
+    "istanbul": "^0.4.2",
+    "karma": "^0.13.22",
+    "karma-browserify": "^5.0.2",
+    "karma-coverage": "^0.5.5",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sauce-launcher": "^0.3.1",
+    "lcov-result-merger": "^1.0.2",
+    "mocha": "^2.4.5",
+    "phantomjs-prebuilt": "^2.1.5",
+    "semantic-release": "^4.3.5",
+    "simple-assert": "^1.0.0",
+    "travis-after-all": "^1.4.4",
+    "validate-commit-msg": "^2.3.1"
+  },
+  "engines": {
+    "node": "*"
+  }
 }
