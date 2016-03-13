@@ -82,6 +82,7 @@ module.exports = function configureKarma(config) {
       browsers: localBrowsers.concat(Object.keys(sauceLabsBrowsers)),
       sauceLabs: {
         testName: packageJson.name,
+        tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER || new Date().getTime(),
         recordVideo: true,
         startConnect: ('TRAVIS' in process.env) === false,
         tags: [
