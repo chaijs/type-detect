@@ -65,7 +65,7 @@
       src="https://img.shields.io/badge/slack-join%20chat-E2206F.svg?style=flat-square"
     />
   </a>
-  <a href="https://gitter.im/chaijs/type-detect">
+  <a href="https://gitter.im/chaijs/chai">
     <img
       alt="Join the Gitter chat"
       src="https://img.shields.io/badge/gitter-join%20chat-D0104D.svg?style=flat-square"
