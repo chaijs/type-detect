@@ -217,7 +217,9 @@ describe('Generic', function () {
     var originalObjectToString = Object.prototype.toString;
     before(function () {
       global.Symbol = global.Symbol || {};
-      global.Symbol.toStringTag = global.Symbol.toStringTag || '__@@toStringTag__';
+      if (!global.Symbol.toStringTag) {
+        global.Symbol.toStringTag = '__@@toStringTag__';
+      }
       var test = {};
       test[Symbol.toStringTag] = function () {
         return 'foo';
@@ -238,12 +240,11 @@ describe('Generic', function () {
 
 
     it('plain object', function () {
-      var obj = {
-        '__@@toStringTag__': function () {
-          return 'Foo';
-        },
+      var obj = {};
+      obj[Symbol.toStringTag] = function () {
+        return 'Foo';
       };
-      assert(type(obj) === 'foo');
+      assert(type(obj) === 'foo', 'type(obj) === "foo"');
     });
 
   });
