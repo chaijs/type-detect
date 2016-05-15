@@ -16,7 +16,8 @@ var setExists = typeof Set !== 'undefined';
 var weakMapExists = typeof WeakMap !== 'undefined';
 var weakSetExists = typeof WeakSet !== 'undefined';
 var dataViewExists = typeof DataView !== 'undefined';
-var symbolIteratorExists = symbolExists && Symbol.iterator;
+var symbolIteratorExists = symbolExists && typeof Symbol.iterator !== 'undefined';
+var symbolToStringTagExists = symbolExists && typeof Symbol.toStringTag !== 'undefined';
 var setEntriesExists = setExists && typeof Set.prototype.entries === 'function';
 var mapEntriesExists = mapExists && typeof Map.prototype.entries === 'function';
 var setIteratorPrototype = getPrototypeOfExists && setEntriesExists && Object.getPrototypeOf(new Set().entries());
@@ -195,7 +196,7 @@ module.exports = function typeDetect(obj) {
     }
   }
 
-  if (getPrototypeOfExists && (symbolExists === false || typeof obj[Symbol.toStringTag] === 'undefined')) {
+  if (getPrototypeOfExists && (symbolToStringTagExists === false || typeof obj[Symbol.toStringTag] === 'undefined')) {
     var objPrototype = Object.getPrototypeOf(obj);
     /* ! Speed optimisation
     * Pre:
