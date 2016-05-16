@@ -60,6 +60,17 @@ describe('Generic', function () {
     assert(type(Object.create(Object.prototype)) === 'object');
   });
 
+  // See: https://github.com/chaijs/type-detect/pull/25
+  it('object with .undefined property getter', function () {
+    var foo = {};
+    Object.defineProperty(foo, 'undefined', {
+      get: function () {
+        throw Error('Should never happen');
+      },
+    });
+    assert(type(foo) === 'object');
+  });
+
   it('boolean', function () {
     assert(type(true) === 'boolean');
     assert(type(false) === 'boolean');
