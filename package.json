@@ -65,7 +65,7 @@
     "eslint-plugin-filenames": "^0.2.0",
     "ghooks": "^1.0.1",
     "istanbul": "^0.4.2",
-    "karma": "^0.13.22",
+    "karma": "^1.0.0",
     "karma-browserify": "^5.0.2",
     "karma-coverage": "^1.0.0",
     "karma-mocha": "^1.0.1",
