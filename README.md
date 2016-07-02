@@ -5,7 +5,7 @@
 </h1>
 
 <p align=center>
-  Improved typeof detection for [node](http://nodejs.org) and the browser.
+  Improved typeof detection for <a href="http://nodejs.org">node</a> and the browser.
 </p>
 
 <p align=center>
