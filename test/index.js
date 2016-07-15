@@ -259,7 +259,6 @@ describe('Generic', function () {
       Object.prototype.toString = originalObjectToString; // eslint-disable-line no-extend-native
     });
 
-
     it('plain object', function () {
       var obj = {};
       obj[Symbol.toStringTag] = function () {
