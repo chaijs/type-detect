@@ -1,6 +1,10 @@
 'use strict';
 var assert = require('simple-assert');
 var type = require('..');
+function itIf(condition) {
+  return condition ? it : it.skip;
+}
+
 describe('Generic', function () {
 
   it('array', function () {
@@ -249,13 +253,32 @@ describe('Generic', function () {
       Object.prototype.toString = originalObjectToString; // eslint-disable-line no-extend-native
     });
 
-
     it('plain object', function () {
       var obj = {};
       obj[Symbol.toStringTag] = function () {
         return 'Foo';
       };
       assert(type(obj) === 'foo', 'type(obj) === "foo"');
+    });
+
+    var extendedArraySupported = false;
+    var extendedArrayBody = [
+      'class ExtendedArray extends Array {',
+      '  get [Symbol.toStringTag]() {',
+      '    return "ExtendedArray";',
+      '  }',
+      '}',
+    ].join('\n');
+    try {
+      eval(extendedArrayBody); // eslint-disable-line no-eval
+      extendedArraySupported = true;
+    } catch (error) {
+      extendedArraySupported = false;
+    }
+
+    itIf(extendedArraySupported)('extended array', function () {
+      var extendedArray = eval(extendedArrayBody + ' new ExtendedArray()'); // eslint-disable-line no-eval
+      assert(type(extendedArray) === 'extendedarray', 'type(new ExtendedArray()) === "extendedarray"');
     });
 
   });
