@@ -94,10 +94,12 @@ module.exports = function typeDetect(obj) {
    * Post:
    *   array literal      x 22,479,650 ops/sec ±0.96% (81 runs sampled)
    */
-  if (isArrayExists && Array.isArray(obj)) {
-    if (symbolToStringTagExists === false || typeof obj[Symbol.toStringTag] === 'undefined') {
-      return 'array';
-    }
+  if (
+    isArrayExists &&
+    Array.isArray(obj) &&
+    (symbolExists === false || typeof obj[Symbol.toStringTag] === 'undefined')
+  ) {
+    return 'array';
   }
 
   if (isDom) {

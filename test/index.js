@@ -264,7 +264,7 @@ describe('Generic', function () {
     var extendedArraySupported = false;
     var extendedArrayBody = [
       'class ExtendedArray extends Array {',
-      '  get [Symbol.toStringTag]() {',
+      '  [Symbol.toStringTag]() {',
       '    return "ExtendedArray";',
       '  }',
       '}',
