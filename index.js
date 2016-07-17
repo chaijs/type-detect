@@ -62,7 +62,7 @@ module.exports = function typeDetect(obj) {
    * Pre:
    *   null               x 28,645,765 ops/sec ±1.17% (82 runs sampled)
    * Post:
-   *   null               x 36,428,962 o ps/sec ±1.37% (84 runs sampled)
+   *   null               x 36,428,962 ops/sec ±1.37% (84 runs sampled)
    */
   if (obj === null) {
     return 'null';
