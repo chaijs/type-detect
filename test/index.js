@@ -247,10 +247,20 @@ describe('Generic', function () {
           return originalObjectToString.call(this);
         };
       }
+
+      // ensure type-detect recognizes global toStringTag sham
+      if (typeof require.resolve === 'function') {
+        delete require.cache[require.resolve('../')];
+        type = require('../'); // eslint-disable-line global-require
+      }
     });
 
     after(function () {
       Object.prototype.toString = originalObjectToString; // eslint-disable-line no-extend-native
+      if (typeof require.resolve === 'function') {
+        delete require.cache[require.resolve('../')];
+        type = require('../'); // eslint-disable-line global-require
+      }
     });
 
     it('plain object', function () {
