@@ -7,19 +7,19 @@ module.exports = function configureKarma(config) {
     'PhantomJS',
   ];
   var sauceLabsBrowsers = {
-    // SauceChromeLatest: {
-    //   base: 'SauceLabs',
-    //   browserName: 'Chrome',
-    // },
-    // SauceFirefoxLatest: {
-    //   base: 'SauceLabs',
-    //   browserName: 'Firefox',
-    // },
-    // SauceSafariLatest: {
-    //   base: 'SauceLabs',
-    //   browserName: 'Safari',
-    //   platform: 'OS X 10.11',
-    // },
+    SauceChromeLatest: {
+      base: 'SauceLabs',
+      browserName: 'Chrome',
+    },
+    SauceFirefoxLatest: {
+      base: 'SauceLabs',
+      browserName: 'Firefox',
+    },
+    SauceSafariLatest: {
+      base: 'SauceLabs',
+      browserName: 'Safari',
+      platform: 'OS X 10.11',
+    },
     SauceInternetExplorerLatest: {
       base: 'SauceLabs',
       browserName: 'Internet Explorer',
@@ -33,10 +33,10 @@ module.exports = function configureKarma(config) {
       base: 'SauceLabs',
       browserName: 'MicrosoftEdge',
     },
-    // SauceAndroidLatest: {
-    //   base: 'SauceLabs',
-    //   browserName: 'Android',
-    // },
+    SauceAndroidLatest: {
+      base: 'SauceLabs',
+      browserName: 'Android',
+    },
   };
   config.set({
     basePath: '',
@@ -62,7 +62,7 @@ module.exports = function configureKarma(config) {
     },
     port: 9876,
     colors: true,
-    concurrency: 2,
+    concurrency: 3,
     autoWatch: false,
     captureTimeout: defaultTimeout,
     browserDisconnectTimeout: defaultTimeout,
