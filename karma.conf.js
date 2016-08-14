@@ -20,19 +20,19 @@ module.exports = function configureKarma(config) {
     //   browserName: 'Safari',
     //   platform: 'OS X 10.11',
     // },
-    // SauceInternetExplorerLatest: {
-    //   base: 'SauceLabs',
-    //   browserName: 'Internet Explorer',
-    // },
+    SauceInternetExplorerLatest: {
+      base: 'SauceLabs',
+      browserName: 'Internet Explorer',
+    },
     SauceInternetExplorerOldestSupported: {
       base: 'SauceLabs',
       browserName: 'Internet Explorer',
       version: 9,
     },
-    // SauceEdgeLatest: {
-    //   base: 'SauceLabs',
-    //   browserName: 'MicrosoftEdge',
-    // },
+    SauceEdgeLatest: {
+      base: 'SauceLabs',
+      browserName: 'MicrosoftEdge',
+    },
     // SauceAndroidLatest: {
     //   base: 'SauceLabs',
     //   browserName: 'Android',
