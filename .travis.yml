@@ -10,7 +10,8 @@ cache:
     - node_modules
 
 node_js:
-  - node
+  - 0.1 # remove this with the next breaking change
+  - lts/*
   - stable
 
 before_install:
