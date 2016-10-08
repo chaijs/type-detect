@@ -4,13 +4,13 @@ var type = require('..');
 describe('Generic', function () {
 
   it('array', function () {
-    assert(type([]) === 'array');
-    assert(type(new Array()) === 'array');
+    assert(type([]) === 'Array');
+    assert(type(new Array()) === 'Array');
   });
 
   it('regexp', function () {
-    assert(type(/a-z/gi) === 'regexp');
-    assert(type(new RegExp('a-z')) === 'regexp');
+    assert(type(/a-z/gi) === 'RegExp');
+    assert(type(new RegExp('a-z')) === 'RegExp');
   });
 
   it('function', function () {
@@ -18,11 +18,11 @@ describe('Generic', function () {
   });
 
   it('arguments', function () {
-    assert(type(arguments) === 'arguments');
+    assert(type(arguments) === 'Arguments');
   });
 
   it('date', function () {
-    assert(type(new Date()) === 'date');
+    assert(type(new Date()) === 'Date');
   });
 
   it('number', function () {
@@ -32,12 +32,18 @@ describe('Generic', function () {
     assert(type(-1.234) === 'number');
     assert(type(Infinity) === 'number');
     assert(type(NaN) === 'number');
-    assert(type(new Number(2)) === 'number');
+  });
+
+  it('number objects', function () {
+    assert(type(new Number(2)) === 'Number');
   });
 
   it('string', function () {
     assert(type('hello world') === 'string');
-    assert(type(new String('hello')) === 'string');
+  });
+
+  it('string objects', function () {
+    assert(type(new String('hello')) === 'String');
   });
 
   it('null', function () {
@@ -52,12 +58,12 @@ describe('Generic', function () {
 
   it('object', function () {
     function Noop() {}
-    assert(type({}) === 'object');
-    assert(type(Noop) !== 'object');
-    assert(type(new Noop()) === 'object');
-    assert(type(new Object()) === 'object');
-    assert(type(Object.create(null)) === 'object');
-    assert(type(Object.create(Object.prototype)) === 'object');
+    assert(type({}) === 'Object');
+    assert(type(Noop) !== 'Object');
+    assert(type(new Noop()) === 'Object');
+    assert(type(new Object()) === 'Object');
+    assert(type(Object.create(null)) === 'Object');
+    assert(type(Object.create(Object.prototype)) === 'Object');
   });
 
   // See: https://github.com/chaijs/type-detect/pull/25
@@ -68,33 +74,36 @@ describe('Generic', function () {
         throw Error('Should never happen');
       },
     });
-    assert(type(foo) === 'object');
+    assert(type(foo) === 'Object');
   });
 
   it('boolean', function () {
     assert(type(true) === 'boolean');
     assert(type(false) === 'boolean');
-    assert(type(new Boolean()) === 'boolean');
     assert(type(!0) === 'boolean');
   });
 
+  it('boolean object', function () {
+    assert(type(new Boolean()) === 'Boolean');
+  });
+
   it('error', function () {
-    assert(type(new Error()) === 'error');
-    assert(type(new TypeError()) === 'error');
-    assert(type(new EvalError()) === 'error');
-    assert(type(new RangeError()) === 'error');
-    assert(type(new ReferenceError()) === 'error');
-    assert(type(new SyntaxError()) === 'error');
-    assert(type(new TypeError()) === 'error');
-    assert(type(new URIError()) === 'error');
+    assert(type(new Error()) === 'Error');
+    assert(type(new TypeError()) === 'Error');
+    assert(type(new EvalError()) === 'Error');
+    assert(type(new RangeError()) === 'Error');
+    assert(type(new ReferenceError()) === 'Error');
+    assert(type(new SyntaxError()) === 'Error');
+    assert(type(new TypeError()) === 'Error');
+    assert(type(new URIError()) === 'Error');
   });
 
   it('Math', function () {
-    assert(type(Math) === 'math');
+    assert(type(Math) === 'Math');
   });
 
   it('JSON', function () {
-    assert(type(JSON) === 'json');
+    assert(type(JSON) === 'JSON');
   });
 
   describe('Stubbed ES2015 Types', function () {
@@ -109,117 +118,117 @@ describe('Generic', function () {
 
     it('map', function () {
       stubObjectToStringOnce('[object Map]');
-      assert(type(new Thing()) === 'map');
+      assert(type(new Thing()) === 'Map');
     });
 
     it('weakmap', function () {
       stubObjectToStringOnce('[object WeakMap]');
-      assert(type(new Thing()) === 'weakmap');
+      assert(type(new Thing()) === 'WeakMap');
     });
 
     it('set', function () {
       stubObjectToStringOnce('[object Set]');
-      assert(type(new Thing()) === 'set');
+      assert(type(new Thing()) === 'Set');
     });
 
     it('weakset', function () {
       stubObjectToStringOnce('[object WeakSet]');
-      assert(type(new Thing()) === 'weakset');
+      assert(type(new Thing()) === 'WeakSet');
     });
 
     it('symbol', function () {
       stubObjectToStringOnce('[object Symbol]');
-      assert(type(new Thing()) === 'symbol');
+      assert(type(new Thing()) === 'Symbol');
     });
 
     it('promise', function () {
       stubObjectToStringOnce('[object Promise]');
-      assert(type(new Thing()) === 'promise');
+      assert(type(new Thing()) === 'Promise');
     });
 
     it('int8array', function () {
       stubObjectToStringOnce('[object Int8Array]');
-      assert(type(new Thing()) === 'int8array');
+      assert(type(new Thing()) === 'Int8Array');
     });
 
     it('uint8array', function () {
       stubObjectToStringOnce('[object Uint8Array]');
-      assert(type(new Thing()) === 'uint8array');
+      assert(type(new Thing()) === 'Uint8Array');
     });
 
     it('uint8clampedarray', function () {
       stubObjectToStringOnce('[object Uint8ClampedArray]');
-      assert(type(new Thing()) === 'uint8clampedarray');
+      assert(type(new Thing()) === 'Uint8ClampedArray');
     });
 
     it('int16array', function () {
       stubObjectToStringOnce('[object Int16Array]');
-      assert(type(new Thing()) === 'int16array');
+      assert(type(new Thing()) === 'Int16Array');
     });
 
     it('uint16array', function () {
       stubObjectToStringOnce('[object Uint16Array]');
-      assert(type(new Thing()) === 'uint16array');
+      assert(type(new Thing()) === 'Uint16Array');
     });
 
     it('int32array', function () {
       stubObjectToStringOnce('[object Int32Array]');
-      assert(type(new Thing()) === 'int32array');
+      assert(type(new Thing()) === 'Int32Array');
     });
 
     it('uint32array', function () {
       stubObjectToStringOnce('[object Uint32Array]');
-      assert(type(new Thing()) === 'uint32array');
+      assert(type(new Thing()) === 'Uint32Array');
     });
 
     it('float32array', function () {
       stubObjectToStringOnce('[object Float32Array]');
-      assert(type(new Thing()) === 'float32array');
+      assert(type(new Thing()) === 'Float32Array');
     });
 
     it('float64array', function () {
       stubObjectToStringOnce('[object Float64Array]');
-      assert(type(new Thing()) === 'float64array');
+      assert(type(new Thing()) === 'Float64Array');
     });
 
     it('dataview', function () {
       stubObjectToStringOnce('[object DataView]');
-      assert(type(new Thing()) === 'dataview');
+      assert(type(new Thing()) === 'DataView');
     });
 
     it('arraybuffer', function () {
       stubObjectToStringOnce('[object ArrayBuffer]');
-      assert(type(new Thing()) === 'arraybuffer');
+      assert(type(new Thing()) === 'ArrayBuffer');
     });
 
     it('generatorfunction', function () {
       stubObjectToStringOnce('[object GeneratorFunction]');
-      assert(type(new Thing()) === 'generatorfunction');
+      assert(type(new Thing()) === 'GeneratorFunction');
     });
 
     it('generator', function () {
       stubObjectToStringOnce('[object Generator]');
-      assert(type(new Thing()) === 'generator');
+      assert(type(new Thing()) === 'Generator');
     });
 
     it('string iterator', function () {
       stubObjectToStringOnce('[object String Iterator]');
-      assert(type(new Thing()) === 'string iterator');
+      assert(type(new Thing()) === 'String Iterator');
     });
 
     it('array iterator', function () {
       stubObjectToStringOnce('[object Array Iterator]');
-      assert(type(new Thing()) === 'array iterator');
+      assert(type(new Thing()) === 'Array Iterator');
     });
 
     it('map iterator', function () {
       stubObjectToStringOnce('[object Map Iterator]');
-      assert(type(new Thing()) === 'map iterator');
+      assert(type(new Thing()) === 'Map Iterator');
     });
 
     it('set iterator', function () {
       stubObjectToStringOnce('[object Set Iterator]');
-      assert(type(new Thing()) === 'set iterator');
+      assert(type(new Thing()) === 'Set Iterator');
     });
 
   });
@@ -255,7 +264,7 @@ describe('Generic', function () {
       obj[Symbol.toStringTag] = function () {
         return 'Foo';
       };
-      assert(type(obj) === 'foo', 'type(obj) === "foo"');
+      assert(type(obj) === 'Foo', 'type(obj) === "Foo"');
     });
 
   });

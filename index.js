@@ -95,7 +95,7 @@ module.exports = function typeDetect(obj) {
    *   array literal      x 22,479,650 ops/sec ±0.96% (81 runs sampled)
    */
   if (isArrayExists && Array.isArray(obj)) {
-    return 'array';
+    return 'Array';
   }
 
   if (isDom) {
@@ -107,7 +107,7 @@ module.exports = function typeDetect(obj) {
      *  - IE Edge <=13 === "[object Object]"
      */
     if (obj === globalObject.location) {
-      return 'location';
+      return 'Location';
     }
 
     /* ! Spec Conformance
@@ -130,7 +130,7 @@ module.exports = function typeDetect(obj) {
      *  - IE Edge <=13 === "[object HTMLDocument]"
      */
     if (obj === globalObject.document) {
-      return 'document';
+      return 'Document';
     }
 
     /* ! Spec Conformance
@@ -140,7 +140,7 @@ module.exports = function typeDetect(obj) {
      *  - IE <=10 === "[object MSMimeTypesCollection]"
      */
     if (obj === (globalObject.navigator || {}).mimeTypes) {
-      return 'mimetypearray';
+      return 'MimeTypeArray';
     }
 
     /* ! Spec Conformance
@@ -150,7 +150,7 @@ module.exports = function typeDetect(obj) {
      *  - IE <=10 === "[object MSPluginsCollection]"
      */
     if (obj === (globalObject.navigator || {}).plugins) {
-      return 'pluginarray';
+      return 'PluginArray';
     }
 
     /* ! Spec Conformance
@@ -160,7 +160,7 @@ module.exports = function typeDetect(obj) {
      *  - IE <=10 === "[object HTMLBlockElement]"
      */
     if (htmlElementExists && obj instanceof HTMLElement && obj.tagName === 'BLOCKQUOTE') {
-      return 'htmlquoteelement';
+      return 'HTMLQuoteElement';
     }
 
     /* ! Spec Conformance
@@ -176,7 +176,7 @@ module.exports = function typeDetect(obj) {
      *  - Safari === "[object HTMLTableCellElement]"
      */
     if (htmlElementExists && obj instanceof HTMLElement && obj.tagName === 'TD') {
-      return 'htmltabledatacellelement';
+      return 'HTMLTableDataCellElement';
     }
 
     /* ! Spec Conformance
@@ -192,7 +192,7 @@ module.exports = function typeDetect(obj) {
      *  - Safari === "[object HTMLTableCellElement]"
      */
     if (htmlElementExists && obj instanceof HTMLElement && obj.tagName === 'TH') {
-      return 'htmltableheadercellelement';
+      return 'HTMLTableHeaderCellElement';
     }
   }
 
@@ -220,7 +220,7 @@ module.exports = function typeDetect(obj) {
   */
   var stringTag = (symbolToStringTagExists && obj[Symbol.toStringTag]);
   if (typeof stringTag === 'string') {
-    return stringTag.toLowerCase();
+    return stringTag;
   }
 
   if (getPrototypeOfExists) {
@@ -234,7 +234,7 @@ module.exports = function typeDetect(obj) {
     *   regex constructor  x 3,931,108 ops/sec ±0.58% (84 runs sampled)
     */
     if (objPrototype === RegExp.prototype) {
-      return 'regexp';
+      return 'RegExp';
     }
 
     /* ! Speed optimisation
@@ -244,7 +244,7 @@ module.exports = function typeDetect(obj) {
     *   date               x 3,953,779 ops/sec ±1.35% (77 runs sampled)
     */
     if (objPrototype === Date.prototype) {
-      return 'date';
+      return 'Date';
     }
 
     /* ! Spec Conformance
@@ -257,7 +257,7 @@ module.exports = function typeDetect(obj) {
      *  - Safari 7.1-Latest === "[object Promise]"
      */
     if (promiseExists && objPrototype === Promise.prototype) {
-      return 'promise';
+      return 'Promise';
     }
 
     /* ! Speed optimisation
@@ -267,7 +267,7 @@ module.exports = function typeDetect(obj) {
     *   set                x 4,545,879 ops/sec ±1.13% (83 runs sampled)
     */
     if (setExists && objPrototype === Set.prototype) {
-      return 'set';
+      return 'Set';
     }
 
     /* ! Speed optimisation
@@ -277,7 +277,7 @@ module.exports = function typeDetect(obj) {
     *   map                x 4,183,945 ops/sec ±6.59% (82 runs sampled)
     */
     if (mapExists && objPrototype === Map.prototype) {
-      return 'map';
+      return 'Map';
     }
 
     /* ! Speed optimisation
@@ -287,7 +287,7 @@ module.exports = function typeDetect(obj) {
     *   weakset            x 4,237,510 ops/sec ±2.01% (77 runs sampled)
     */
     if (weakSetExists && objPrototype === WeakSet.prototype) {
-      return 'weakset';
+      return 'WeakSet';
     }
 
     /* ! Speed optimisation
@@ -297,7 +297,7 @@ module.exports = function typeDetect(obj) {
     *   weakmap            x 3,881,384 ops/sec ±1.45% (82 runs sampled)
     */
     if (weakMapExists && objPrototype === WeakMap.prototype) {
-      return 'weakmap';
+      return 'WeakMap';
     }
 
     /* ! Spec Conformance
@@ -307,7 +307,7 @@ module.exports = function typeDetect(obj) {
      *  - Edge <=13 === "[object Object]"
      */
     if (dataViewExists && objPrototype === DataView.prototype) {
-      return 'dataview';
+      return 'DataView';
     }
 
     /* ! Spec Conformance
@@ -317,7 +317,7 @@ module.exports = function typeDetect(obj) {
      *  - Edge <=13 === "[object Object]"
      */
     if (mapExists && objPrototype === mapIteratorPrototype) {
-      return 'map iterator';
+      return 'Map Iterator';
     }
 
     /* ! Spec Conformance
@@ -327,7 +327,7 @@ module.exports = function typeDetect(obj) {
      *  - Edge <=13 === "[object Object]"
      */
     if (setExists && objPrototype === setIteratorPrototype) {
-      return 'set iterator';
+      return 'Set Iterator';
     }
 
     /* ! Spec Conformance
@@ -337,7 +337,7 @@ module.exports = function typeDetect(obj) {
      *  - Edge <=13 === "[object Object]"
      */
     if (arrayIteratorExists && objPrototype === arrayIteratorPrototype) {
-      return 'array iterator';
+      return 'Array Iterator';
     }
 
     /* ! Spec Conformance
@@ -347,7 +347,7 @@ module.exports = function typeDetect(obj) {
      *  - Edge <=13 === "[object Object]"
      */
     if (stringIteratorExists && objPrototype === stringIteratorPrototype) {
-      return 'string iterator';
+      return 'String Iterator';
     }
 
     /* ! Speed optimisation
@@ -357,7 +357,7 @@ module.exports = function typeDetect(obj) {
     *   object from null   x 5,838,000 ops/sec ±0.99% (84 runs sampled)
     */
     if (objPrototype === null) {
-      return 'object';
+      return 'Object';
     }
   }
 
@@ -365,8 +365,7 @@ module.exports = function typeDetect(obj) {
     .prototype
     .toString
     .call(obj)
-    .slice(toStringLeftSliceLength, toStringRightSliceLength)
-    .toLowerCase();
+    .slice(toStringLeftSliceLength, toStringRightSliceLength);
 };
 
 module.exports.typeDetect = module.exports;

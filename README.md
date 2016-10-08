@@ -104,15 +104,15 @@ var type = require('type-detect');
 #### array
 
 ```js
-assert(type([]) === 'array');
-assert(type(new Array()) === 'array');
+assert(type([]) === 'Array');
+assert(type(new Array()) === 'Array');
 ```
 
 #### regexp
 
 ```js
-assert(type(/a-z/gi) === 'regexp');
-assert(type(new RegExp('a-z')) === 'regexp');
+assert(type(/a-z/gi) === 'RegExp');
+assert(type(new RegExp('a-z')) === 'RegExp');
 ```
 
 #### function
@@ -132,7 +132,7 @@ assert(type(function () {}) === 'function');
 #### date
 
 ```js
-assert(type(new Date) === 'date');
+assert(type(new Date) === 'Date');
 ```
 
 #### number
@@ -144,14 +144,14 @@ assert(type(-1) === 'number');
 assert(type(-1.234) === 'number');
 assert(type(Infinity) === 'number');
 assert(type(NaN) === 'number');
-assert(type(new Number(1)) === 'number');
+assert(type(new Number(1)) === 'Number'); // note - the object version has a capital N
 ```
 
 #### string
 
 ```js
 assert(type('hello world') === 'string');
-assert(type(new String('hello')) === 'string');
+assert(type(new String('hello')) === 'String'); // note - the object version has a capital S
 ```
 
 #### null
@@ -172,10 +172,10 @@ assert(type(null) !== 'undefined');
 
 ```js
 var Noop = function () {};
-assert(type({}) === 'object');
-assert(type(Noop) !== 'object');
-assert(type(new Noop) === 'object');
-assert(type(new Object) === 'object');
+assert(type({}) === 'Object');
+assert(type(Noop) !== 'Object');
+assert(type(new Noop) === 'Object');
+assert(type(new Object) === 'Object');
 ```
 
 #### ECMA6 Types
@@ -183,23 +183,23 @@ assert(type(new Object) === 'object');
 All new ECMAScript 2015 objects are also supported, such as Promises and Symbols:
 
 ```js
-assert(type(new Map() === 'map');
-assert(type(new WeakMap()) === 'weakmap');
-assert(type(new Set()) === 'set');
-assert(type(new WeakSet()) === 'weakset');
-assert(type(Symbol()) === 'symbol');
-assert(type(new Promise(callback) === 'promise');
-assert(type(new Int8Array()) === 'int8array');
-assert(type(new Uint8Array()) === 'uint8array');
-assert(type(new UInt8ClampedArray()) === 'uint8clampedarray');
-assert(type(new Int16Array()) === 'int16array');
-assert(type(new Uint16Array()) === 'uint16array');
-assert(type(new Int32Array()) === 'int32array');
-assert(type(new UInt32Array()) === 'uint32array');
-assert(type(new Float32Array()) === 'float32array');
-assert(type(new Float64Array()) === 'float64array');
-assert(type(new ArrayBuffer()) === 'arraybuffer');
-assert(type(new DataView(arrayBuffer)) === 'dataview');
+assert(type(new Map() === 'Map');
+assert(type(new WeakMap()) === 'WeakMap');
+assert(type(new Set()) === 'Set');
+assert(type(new WeakSet()) === 'WeakSet');
+assert(type(Symbol()) === 'Symbol');
+assert(type(new Promise(callback) === 'Promise');
+assert(type(new Int8Array()) === 'Int8Array');
+assert(type(new Uint8Array()) === 'Uint8Array');
+assert(type(new UInt8ClampedArray()) === 'Uint8ClampedArray');
+assert(type(new Int16Array()) === 'Int16Array');
+assert(type(new Uint16Array()) === 'Uint16Array');
+assert(type(new Int32Array()) === 'Int32Array');
+assert(type(new UInt32Array()) === 'Uint32Array');
+assert(type(new Float32Array()) === 'Float32Array');
+assert(type(new Float64Array()) === 'Float64Array');
+assert(type(new ArrayBuffer()) === 'ArrayBuffer');
+assert(type(new DataView(arrayBuffer)) === 'DataView');
 ```
 
 Also, if you use `Symbol.toStringTag` to change an Objects return value of the `toString()` Method, `type()` will return this value, e.g:
