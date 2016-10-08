@@ -38,6 +38,19 @@ try {
 } catch (error) {
   console.error('cannot benchmark generator functions');
 }
+[
+  'Float64Array', 'Float32Array',
+  'Uint32Array', 'Uint16Array', 'Uint8Array',
+  'Int32Array', 'Int16Array', 'Int8Array',
+  'Uint8ClampedArray',
+].forEach(function (value) {
+  if (typeof global[value] === 'function') {
+    fixtures[value + new Array(19 - value.length).join(' ')] = new (global[value])(1);
+  }
+});
+if (typeof DataView === 'function') {
+  fixtures['DataView          '] = new DataView(new ArrayBuffer(1));
+}
 
 var filter = process.argv[2] || '';
 Object.keys(fixtures).filter(function (key) {
