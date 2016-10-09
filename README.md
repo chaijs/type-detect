@@ -125,7 +125,7 @@ assert(type(function () {}) === 'function');
 
 ```js
 (function () {
-  assert(type(arguments) === 'arguments');
+  assert(type(arguments) === 'Arguments');
 })();
 ```
 
