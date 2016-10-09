@@ -77,6 +77,14 @@
 
 Type Detect is a module which you can use to detect the type of a given object. It returns a string representation of the object's type, either using [`typeof`](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-typeof-operator) or [`@@toStringTag`](http://www.ecma-international.org/ecma-262/6.0/index.html#sec-symbol.tostringtag). It also normalizes some object names for consistency among browsers.
 
+## Why?
+
+The `typeof` operator will only specify primitive values; everthing else is `"object"` (including `null`, arrays, regexps, etc). Many developers use `Object.prototype.toString()` - which is a fine alternative and returns many more types (null returns `[object Null]`, Arrays as `[object Array]`, regexps as `[object RegExp]` etc). 
+
+Sadly, `Object.prototype.toString` is slow, and buggy. By slow - we mean it is slower than `typeof`. By buggy - we mean that some values (like Promises, the global object, iterators, dataviews, a bunch of HTML elements) all report different things in different browsers.
+
+`type-detect` fixes all of the shortcomings with `Object.prototype.toString`. We have extra code to speed up checks of JS and DOM objects, as much as 20-30x faster for some values. `type-detect` also fixes any consistencies with these objects.
+
 ## Installation
 
 ### Node.js
