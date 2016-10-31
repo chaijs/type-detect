@@ -80,6 +80,6 @@
     "validate-commit-msg": "^2.3.1"
   },
   "engines": {
-    "node": "*"
+    "node": ">= 4"
   }
 }
