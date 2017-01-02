@@ -57,7 +57,7 @@
   "dependencies": {},
   "devDependencies": {
     "benchmark": "^2.1.0",
-    "browserify": "^13.0.0",
+    "browserify": "^13.1.0",
     "browserify-istanbul": "^1.0.0",
     "coveralls": "2.11.9",
     "eslint": "^2.9.0",
