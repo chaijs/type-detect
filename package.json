@@ -62,7 +62,7 @@
     "coveralls": "2.11.9",
     "eslint": "^2.9.0",
     "eslint-config-strict": "^8.5.0",
-    "eslint-plugin-filenames": "^0.2.0",
+    "eslint-plugin-filenames": "^1.0.0",
     "ghooks": "^1.0.1",
     "istanbul": "^0.4.2",
     "karma": "^1.1.2",
