@@ -56,7 +56,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "benchmark": "^2.1.0",
+    "benchmark": "^2.1.1",
     "browserify": "^13.0.0",
     "browserify-istanbul": "^1.0.0",
     "coveralls": "2.11.9",
