@@ -156,7 +156,7 @@ module.exports = function typeDetect(obj) {
      * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
      *  - IE <=10 === "[object HTMLBlockElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'BLOCKQUOTE') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'BLOCKQUOTE') {
       return 'HTMLQuoteElement';
     }
 
@@ -172,7 +172,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'TD') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TD') {
       return 'HTMLTableDataCellElement';
     }
 
@@ -188,7 +188,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'TH') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TH') {
       return 'HTMLTableHeaderCellElement';
     }
   }
