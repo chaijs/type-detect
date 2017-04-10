@@ -21,7 +21,7 @@ var setIteratorPrototype = setEntriesExists && Object.getPrototypeOf(new Set().e
 var mapIteratorPrototype = mapEntriesExists && Object.getPrototypeOf(new Map().entries());
 var arrayIteratorExists = symbolIteratorExists && typeof Array.prototype[Symbol.iterator] === 'function';
 var arrayIteratorPrototype = arrayIteratorExists && Object.getPrototypeOf([][Symbol.iterator]());
-var stringIteratorExists = symbolIteratorExists && typeof Array.prototype[Symbol.iterator] === 'function';
+var stringIteratorExists = symbolIteratorExists && typeof String.prototype[Symbol.iterator] === 'function';
 var stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
 var toStringLeftSliceLength = 8;
 var toStringRightSliceLength = -1;
