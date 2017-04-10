@@ -25,6 +25,7 @@
   "scripts": {
     "bench": "node bench",
     "build": "browserify --bare $npm_pakcage_main --standalone typeDetect -o type-detect.js",
+    "commit-msg": "validate-commit-msg",
     "lint": "eslint --ignore-path .gitignore .",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
@@ -34,18 +35,13 @@
     "test:node": "istanbul cover _mocha",
     "upload-coverage": "lcov-result-merger 'coverage/**/lcov.info' | coveralls; exit 0"
   },
-  "config": {
-    "ghooks": {
-      "commit-msg": "validate-commit-msg"
-    }
-  },
   "eslintConfig": {
-    "extends": [
-      "strict/es5"
-    ],
     "env": {
       "es6": true
     },
+    "extends": [
+      "strict/es5"
+    ],
     "globals": {
       "HTMLElement": false
     },
@@ -57,13 +53,13 @@
   "dependencies": {},
   "devDependencies": {
     "benchmark": "^2.1.0",
-    "browserify": "^13.0.0",
-    "browserify-istanbul": "^1.0.0",
-    "coveralls": "2.11.9",
-    "eslint": "^2.9.0",
-    "eslint-config-strict": "^8.5.0",
-    "eslint-plugin-filenames": "^0.2.0",
-    "ghooks": "^1.0.1",
+    "browserify": "^14.3.0",
+    "browserify-istanbul": "^2.0.0",
+    "coveralls": "2.13.0",
+    "eslint": "^3.19.0",
+    "eslint-config-strict": "^13.0.0",
+    "eslint-plugin-filenames": "^1.1.0",
+    "husky": "^0.13.3",
     "istanbul": "^0.4.2",
     "karma": "^1.1.2",
     "karma-browserify": "^5.0.2",
@@ -74,7 +70,7 @@
     "lcov-result-merger": "^1.2.0",
     "mocha": "^3.0.0",
     "phantomjs-prebuilt": "^2.1.5",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^6.3.2",
     "simple-assert": "^1.0.0",
     "travis-after-all": "^1.4.4",
     "validate-commit-msg": "^2.3.1"
