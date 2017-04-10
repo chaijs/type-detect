@@ -1,4 +1,5 @@
 'use strict';
+
 var assert = require('simple-assert');
 var type = require('..');
 var isNode = typeof process !== 'undefined' && typeof process.release === 'object' && process.release.name;
