@@ -1,20 +1,30 @@
 sudo: false
+
 language: node_js
+
 addons:
   sauce_connect: true
+
 cache:
   directories:
     - node_modules
+
 node_js:
-  - 0.1
-  - 4.3
-  - stable
+ - 4 # to be removed 2018-04-01
+ - 6 # to be removed 2019-04-01
+ - 7 # to be removed 2017-06-30
+ - lts/* # safety net; don't remove
+ - node # safety net; don't remove
+
 before_install:
-  - npm i -g npm
+  - npm i -g npm@latest
+
 script:
   - npm t
+
 after_success:
   - 'travis-after-all && npm run semantic-release'
+
 env:
   global:
     - secure: AgiUWRCNP2z0oHCjdm3lk4YawBOQz8Q4DOrzOR3tDt2fSWo2t40cynfGJlQwpFmTvec5G04lO9bEC9/yoW7xAS0ysu5p7utngXaKtKDoq3Zr0aYLLLsCv/0PAv1YstMyo/mRbRetxob76wUFcrbB3r5alIF5YW1JCmj/O9bvdUQ=
