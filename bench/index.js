@@ -1,4 +1,5 @@
 'use strict';
+
 var typeDetect = require('../');
 var Benchmark = require('benchmark');
 var benches = [];

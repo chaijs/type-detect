@@ -1,4 +1,6 @@
 'use strict';
+
+/* eslint-disable no-process-env */
 var packageJson = require('./package.json');
 var defaultTimeout = 120000;
 var browserifyIstanbul = require('browserify-istanbul');

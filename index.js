@@ -1,4 +1,5 @@
 'use strict';
+
 /* !
  * type-detect
  * Copyright(c) 2013 jake luer <jake@alogicalparadox.com>

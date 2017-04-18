@@ -1,4 +1,5 @@
 'use strict';
+
 var assert = require('simple-assert');
 var type = require('..');
 function describeIf(condition) {
