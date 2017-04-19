@@ -6,6 +6,7 @@
  */
 var promiseExists = typeof Promise === 'function';
 
+/* eslint-disable */
 // See http://stackoverflow.com/a/6930376
 var globalObject;
 try {
@@ -13,6 +14,7 @@ try {
 } catch (e) {
   globalObject = window;
 }
+/* eslint-enable */
 
 /*
  * All of these attributes must be available on the global object for the current environment
@@ -22,9 +24,9 @@ var domIndicatorAttributes = [
   'location',
   'document',
   'navigator',
-  'HTMLElement'
+  'HTMLElement',
 ];
-var isDom = domIndicatorAttributes.every(function(attr) {
+var isDom = domIndicatorAttributes.every(function inGlobal(attr) {
   return attr in globalObject;
 });
 
