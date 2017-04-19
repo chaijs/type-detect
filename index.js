@@ -5,8 +5,29 @@
  * MIT Licensed
  */
 var promiseExists = typeof Promise === 'function';
-var globalObject = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : self; // eslint-disable-line
-var isDom = 'location' in globalObject && 'document' in globalObject;
+
+// See http://stackoverflow.com/a/6930376
+var globalObject;
+try {
+  globalObject = Function('return this')() || (42, eval)('this');
+} catch (e) {
+  globalObject = window;
+}
+
+/*
+ * All of these attributes must be available on the global object for the current environment
+ * to be considered a DOM environment (browser)
+ */
+var domIndicatorAttributes = [
+  'location',
+  'document',
+  'navigator',
+  'HTMLElement'
+];
+var isDom = domIndicatorAttributes.every(function(attr) {
+  return attr in globalObject;
+});
+
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
 var setExists = typeof Set !== 'undefined';
@@ -156,7 +177,7 @@ module.exports = function typeDetect(obj) {
      * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
      *  - IE <=10 === "[object HTMLBlockElement]"
      */
-    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'BLOCKQUOTE') {
+    if (obj instanceof HTMLElement && obj.tagName === 'BLOCKQUOTE') {
       return 'HTMLQuoteElement';
     }
 
@@ -172,7 +193,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TD') {
+    if (obj instanceof HTMLElement && obj.tagName === 'TD') {
       return 'HTMLTableDataCellElement';
     }
 
@@ -188,7 +209,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TH') {
+    if (obj instanceof HTMLElement && obj.tagName === 'TH') {
       return 'HTMLTableHeaderCellElement';
     }
   }
