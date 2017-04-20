@@ -92,7 +92,10 @@ module.exports = function typeDetect(obj) {
    * Post:
    *   array literal      x 22,479,650 ops/sec ±0.96% (81 runs sampled)
    */
-  if (Array.isArray(obj)) {
+  if (
+    Array.isArray(obj) &&
+    (symbolToStringTagExists === false || typeof obj[Symbol.toStringTag] === 'undefined')
+  ) {
     return 'Array';
   }
 
