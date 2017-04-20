@@ -94,7 +94,7 @@ module.exports = function typeDetect(obj) {
    */
   if (
     Array.isArray(obj) &&
-    (symbolToStringTagExists === false || typeof obj[Symbol.toStringTag] === 'undefined')
+    (symbolToStringTagExists === false || !(Symbol.toStringTag in obj))
   ) {
     return 'Array';
   }
