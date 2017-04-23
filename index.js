@@ -52,6 +52,20 @@ module.exports = function typeDetect(obj) {
    *   function           x 31,296,870 ops/sec ±0.96% (83 runs sampled)
    */
   var typeofObj = typeof obj;
+  
+  if (typeofObj === 'number') {
+      if (obj !== obj) {
+          return 'NaN';
+      }
+      if (obj === Infinity) {
+          return 'Infinity';
+      }
+      if (obj === (-Infinity)) {
+          return 'Infinity';
+      }
+      return 'number';
+  }
+  
   if (typeofObj !== 'object') {
     return typeofObj;
   }
