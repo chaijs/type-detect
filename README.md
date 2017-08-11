@@ -195,7 +195,7 @@ assert(type(new Map() === 'Map');
 assert(type(new WeakMap()) === 'WeakMap');
 assert(type(new Set()) === 'Set');
 assert(type(new WeakSet()) === 'WeakSet');
-assert(type(Symbol()) === 'Symbol');
+assert(type(Symbol()) === 'symbol');
 assert(type(new Promise(callback) === 'Promise');
 assert(type(new Int8Array()) === 'Int8Array');
 assert(type(new Uint8Array()) === 'Uint8Array');
