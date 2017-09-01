@@ -79,7 +79,7 @@ Type Detect is a module which you can use to detect the type of a given object. 
 
 ## Why?
 
-The `typeof` operator will only specify primitive values; everthing else is `"object"` (including `null`, arrays, regexps, etc). Many developers use `Object.prototype.toString()` - which is a fine alternative and returns many more types (null returns `[object Null]`, Arrays as `[object Array]`, regexps as `[object RegExp]` etc). 
+The `typeof` operator will only specify primitive values; everything else is `"object"` (including `null`, arrays, regexps, etc). Many developers use `Object.prototype.toString()` - which is a fine alternative and returns many more types (null returns `[object Null]`, Arrays as `[object Array]`, regexps as `[object RegExp]` etc). 
 
 Sadly, `Object.prototype.toString` is slow, and buggy. By slow - we mean it is slower than `typeof`. By buggy - we mean that some values (like Promises, the global object, iterators, dataviews, a bunch of HTML elements) all report different things in different browsers.
 
