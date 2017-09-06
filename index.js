@@ -1,4 +1,5 @@
 'use strict';
+
 /* !
  * type-detect
  * Copyright(c) 2013 jake luer <jake@alogicalparadox.com>
@@ -20,15 +21,10 @@ try {
  * All of these attributes must be available on the global object for the current environment
  * to be considered a DOM environment (browser)
  */
-var domIndicatorAttributes = [
-  'location',
-  'document',
-  'navigator',
-  'HTMLElement',
-];
-var isDom = domIndicatorAttributes.every(function inGlobal(attr) {
-  return attr in globalObject;
-});
+var isDom = 'location' in globalObject &&
+  'document' in globalObject &&
+  'navigator' in globalObject &&
+  'HTMLElement' in globalObject;
 
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
