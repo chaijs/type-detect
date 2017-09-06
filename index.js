@@ -7,22 +7,22 @@
  */
 var promiseExists = typeof Promise === 'function';
 
-// See http://stackoverflow.com/a/6930376
-var globalObject = null;
-try {
-  globalObject = new Function('return this')(); // eslint-disable-line no-new-func
-} catch (ignoredError) {
-  globalObject = window; // eslint-disable-line no-undef
-}
+/* eslint-disable no-undef */
+var isDom = false;
+var globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
 
 /*
  * All of these attributes must be available on the global object for the current environment
  * to be considered a DOM environment (browser)
  */
-var isDom = 'location' in globalObject &&
-  'document' in globalObject &&
-  'navigator' in globalObject &&
-  'HTMLElement' in globalObject;
+if (typeof window === 'object' &&
+  'document' in window &&
+  'navigator' in window &&
+  'HTMLElement' in window
+) {
+  isDom = true;
+  globalObject = window; // eslint-disable-line no-undef
+}
 
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
@@ -173,7 +173,7 @@ module.exports = function typeDetect(obj) {
      * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
      *  - IE <=10 === "[object HTMLBlockElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'BLOCKQUOTE') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'BLOCKQUOTE') {
       return 'HTMLQuoteElement';
     }
 
@@ -189,7 +189,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'TD') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TD') {
       return 'HTMLTableDataCellElement';
     }
 
@@ -205,7 +205,7 @@ module.exports = function typeDetect(obj) {
      *  - Firefox === "[object HTMLTableCellElement]"
      *  - Safari === "[object HTMLTableCellElement]"
      */
-    if (obj instanceof HTMLElement && obj.tagName === 'TH') {
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TH') {
       return 'HTMLTableHeaderCellElement';
     }
   }
