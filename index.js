@@ -10,7 +10,7 @@ var promiseExists = typeof Promise === 'function';
 // See http://stackoverflow.com/a/6930376
 var globalObject = null;
 try {
-  globalObject = Function('return this')() || (0, eval)('this'); // eslint-disable-line no-new-func, no-eval
+  globalObject = new Function('return this')(); // eslint-disable-line no-new-func
 } catch (ignoredError) {
   globalObject = window; // eslint-disable-line no-undef
 }
