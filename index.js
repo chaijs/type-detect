@@ -21,7 +21,6 @@ if (typeof window === 'object' &&
   'HTMLElement' in window
 ) {
   isDom = true;
-  globalObject = window; // eslint-disable-line no-undef
 }
 
 var symbolExists = typeof Symbol !== 'undefined';
