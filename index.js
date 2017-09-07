@@ -8,20 +8,16 @@
 var promiseExists = typeof Promise === 'function';
 
 /* eslint-disable no-undef */
-var isDom = false;
 var globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
 
 /*
  * All of these attributes must be available on the global object for the current environment
  * to be considered a DOM environment (browser)
  */
-if (typeof window === 'object' &&
+var isDom = typeof window === 'object' &&
   'document' in window &&
   'navigator' in window &&
-  'HTMLElement' in window
-) {
-  isDom = true;
-}
+  'HTMLElement' in window;
 
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
