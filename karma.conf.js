@@ -1,14 +1,12 @@
-'use strict';
-
 /* eslint-disable no-process-env */
-var packageJson = require('./package.json');
-var defaultTimeout = 120000;
-var browserifyIstanbul = require('browserify-istanbul');
+const packageJson = require('./package.json');
+const defaultTimeout = 120000;
+const browserifyIstanbul = require('browserify-istanbul');
 module.exports = function configureKarma(config) {
-  var localBrowsers = [
+  const localBrowsers = [
     'PhantomJS',
   ];
-  var sauceLabsBrowsers = {
+  const sauceLabsBrowsers = {
     SauceChromeLatest: {
       base: 'SauceLabs',
       browserName: 'Chrome',
@@ -73,10 +71,10 @@ module.exports = function configureKarma(config) {
   });
 
   if (process.env.SAUCE_ACCESS_KEY && process.env.SAUCE_USERNAME) {
-    var branch = process.env.TRAVIS_BRANCH || 'local';
-    var build = 'localbuild';
+    const branch = process.env.TRAVIS_BRANCH || 'local';
+    let build = 'localbuild';
     if (process.env.TRAVIS_JOB_NUMBER) {
-      build = 'travis@' + process.env.TRAVIS_JOB_NUMBER;
+      build = `travis@${ process.env.TRAVIS_JOB_NUMBER }`;
     }
     config.reporters.push('saucelabs');
     config.set({
@@ -88,8 +86,8 @@ module.exports = function configureKarma(config) {
         recordVideo: true,
         startConnect: ('TRAVIS' in process.env) === false,
         tags: [
-          'typeDetect_' + packageJson.version,
-          process.env.SAUCE_USERNAME + '@' + branch,
+          `typeDetect_${ packageJson.version }`,
+          `${ process.env.SAUCE_USERNAME }@${ branch }`,
           build,
         ],
       },

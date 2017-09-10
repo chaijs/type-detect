@@ -40,14 +40,15 @@
       "es6": true
     },
     "extends": [
-      "strict/es5"
+      "strict/es6"
     ],
     "globals": {
       "HTMLElement": false
     },
     "rules": {
       "complexity": 0,
-      "max-statements": 0
+      "max-statements": 0,
+      "prefer-rest-params": 0
     }
   },
   "dependencies": {},
