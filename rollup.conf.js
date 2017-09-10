@@ -1,7 +1,9 @@
-import coverage from 'rollup-plugin-coverage';
+import coverage from 'rollup-plugin-istanbul';
 import common from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import transform from 'rollup-plugin-buble';
+import nyc from 'nyc';
+const Instrumenter = (new (new nyc)._instrumenterLib.istanbul).createInstrumenter; // eslint-disable-line
 const env = process.env.NODE_ENV || 'test'; // eslint-disable-line no-process-env
 export default {
   input: env === 'test' ? 'test/index.js' : 'index.js',
@@ -11,7 +13,7 @@ export default {
     format: 'iife',
   },
   plugins: [
-    env === 'test' ? coverage({ exclude: 'test/*.js' }) : null,
+    env === 'test' ? coverage({ exclude: 'test/*.js', instrumenter: { Instrumenter } }) : null,
     common(),
     resolve(),
     transform(),
