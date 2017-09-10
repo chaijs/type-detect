@@ -19,3 +19,5 @@ npm-debug.log
 coverage/
 
 type-detect.js
+type-detect.test.js
+.nyc_output

@@ -1,7 +1,6 @@
 /* eslint-disable no-process-env */
 const packageJson = require('./package.json');
 const defaultTimeout = 120000;
-const browserifyIstanbul = require('browserify-istanbul');
 module.exports = function configureKarma(config) {
   const localBrowsers = [
     'PhantomJS',
@@ -42,19 +41,9 @@ module.exports = function configureKarma(config) {
     basePath: '',
     browsers: localBrowsers,
     logLevel: process.env.npm_config_debug ? config.LOG_DEBUG : config.LOG_INFO,
-    frameworks: [ 'browserify', 'mocha' ],
-    files: [ 'test/*.js' ],
+    frameworks: [ 'mocha' ],
+    files: [ 'type-detect.test.js' ],
     exclude: [],
-    preprocessors: {
-      'test/*.js': [ 'browserify' ],
-    },
-    browserify: {
-      debug: true,
-      bare: true,
-      transform: [
-        browserifyIstanbul({ ignore: [ '**/node_modules/**', '**/test/**' ] }),
-      ],
-    },
     reporters: [ 'progress', 'coverage' ],
     coverageReporter: {
       type: 'lcov',

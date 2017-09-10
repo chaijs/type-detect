@@ -1,5 +1,9 @@
 import assert from 'simple-assert';
 import type from '..';
+import './dom.js';
+import './new-ecmascript-types.js';
+import './node.js';
+import './tostringtag-extras.js';
 describe('Generic', () => {
 
   it('array', () => {
@@ -235,9 +239,10 @@ describe('Generic', () => {
   describe('@@toStringTag Sham', () => {
     const originalObjectToString = Object.prototype.toString;
     before(() => {
-      self.Symbol = self.Symbol || {};
-      if (!self.Symbol.toStringTag) {
-        self.Symbol.toStringTag = '__@@toStringTag__';
+      const globalObject = typeof self === 'object' ? self : global;
+      globalObject.Symbol = globalObject.Symbol || {};
+      if (!Symbol.toStringTag) {
+        Symbol.toStringTag = '__@@toStringTag__';
       }
       const test = {};
       test[Symbol.toStringTag] = function () {
