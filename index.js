@@ -18,6 +18,7 @@ var isDom = typeof window === 'object' &&
   'document' in window &&
   'navigator' in window &&
   'HTMLElement' in window;
+/* eslint-enable */
 
 var symbolExists = typeof Symbol !== 'undefined';
 var mapExists = typeof Map !== 'undefined';
