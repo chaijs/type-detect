@@ -25,7 +25,7 @@ if (process.env.SAUCE_ACCESS_KEY && process.env.SAUCE_USERNAME) {
   job = process.env.TRAVIS_JOB_NUMBER;
   build = `travis@${ process.env.TRAVIS_JOB_NUMBER }`;
   startConnect = true;
-} else {
+} else if (!process.env.KARMA_MANUAL) {
   browsers = [];
   frameworks.push('detectBrowsers');
 }
@@ -68,6 +68,20 @@ module.exports = function configureKarma(config) {
     detectBrowsers: {
       enabled: true,
       usePhantomJS: false,
+      postDetection(detectedBrowsers) {
+        if (detectedBrowsers.length === 0) {
+          /* eslint-disable no-console, no-process-exit */
+          console.log('**********************************');
+          console.log('**************WARNING*************');
+          console.log('**********************************');
+          console.log('Karma has been unable to detect a browser on your system');
+          console.log('Karma will now exit(0). If you have a browser you\'d like to test');
+          console.log('please run `env KARMA_MANUAL=1 karma`, and manually load up a browser');
+          process.exit(0);
+          /* eslint-enable */
+        }
+        return detectedBrowsers;
+      },
     },
     sauceLabs: {
       testName: packageJson.name,
