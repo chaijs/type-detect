@@ -36,7 +36,7 @@
     "test:node": "nyc mocha type-detect.test.js",
     "posttest:node": "nyc report --report-dir \"coverage/node-$(node --version)\" --reporter=lcovonly && npm run upload-coverage",
     "posttest:browser": "npm run upload-coverage",
-    "upload-coverage": "lcov-result-merger 'coverage/**/lcov.info' | coveralls || exit 0"
+    "upload-coverage": "codecov"
   },
   "eslintConfig": {
     "env": {
@@ -59,7 +59,7 @@
     "benchmark": "^2.1.0",
     "buble": "^0.15.2",
     "commitlint-config-angular": "^3.2.0",
-    "coveralls": "2.13.0",
+    "codecov": "^3.0.0",
     "cross-env": "^5.0.5",
     "eslint": "^3.19.0",
     "eslint-config-strict": "^13.0.0",
@@ -77,7 +77,6 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-safaritechpreview-launcher": "0.0.6",
     "karma-sauce-launcher": "^1.2.0",
-    "lcov-result-merger": "^1.2.0",
     "mocha": "^3.5.1",
     "nyc": "^11.2.1",
     "rollup": "^0.49.3",
