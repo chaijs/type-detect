@@ -5,9 +5,7 @@ let branch = 'local';
 let job = Date.now();
 let startConnect = false;
 const reporters = [ 'progress', 'coverage' ];
-const tags = [
-  `${ packageJson.name }@${ packageJson.version }`,
-];
+const tags = [ `${ packageJson.name }@${ packageJson.version }` ];
 const frameworks = [ 'mocha' ];
 
 /* eslint-disable no-process-env */

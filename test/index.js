@@ -112,8 +112,8 @@ describe('Generic', () => {
   describe('Stubbed ES2015 Types', () => {
     const originalObjectToString = Object.prototype.toString;
     function stubObjectToStringOnce(staticValue) {
-      Object.prototype.toString = function () {  // eslint-disable-line no-extend-native
-        Object.prototype.toString = originalObjectToString;  // eslint-disable-line no-extend-native
+      Object.prototype.toString = function () { // eslint-disable-line no-extend-native
+        Object.prototype.toString = originalObjectToString; // eslint-disable-line no-extend-native
         return staticValue;
       };
     }
