@@ -88,6 +88,6 @@
     "simple-assert": "^1.0.0"
   },
   "engines": {
-    "node": "*"
+    "node": ">=4"
   }
 }
