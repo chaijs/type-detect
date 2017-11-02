@@ -9,9 +9,6 @@ cache:
     - node_modules
     - ~/.npm
 
-before_install:
-  - npm i -g npm@5
-
 node_js: 8
 
 jobs:
@@ -46,12 +43,15 @@ jobs:
       script: npm run test:node
     - stage: test
       node_js: 7 # to be removed 2017-06-30
+      before_install: npm i -g npm@5
       script: npm run test:node
     - stage: test
       node_js: 6 # to be removed 2019-04-01
+      before_install: npm i -g npm@5
       script: npm run test:node
     - stage: test
       node_js: 4 # to be removed 2018-04-01
+      before_install: npm i -g npm@5
       script: npm run test:node
     - stage: test
       node_js: lts/* # safety net; don't remove
