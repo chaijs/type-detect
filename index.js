@@ -1,43 +1,41 @@
-'use strict';
-
 /* !
  * type-detect
  * Copyright(c) 2013 jake luer <jake@alogicalparadox.com>
  * MIT Licensed
  */
-var promiseExists = typeof Promise === 'function';
+const promiseExists = typeof Promise === 'function';
 
 /* eslint-disable no-undef */
-var globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
+const globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
 
 /*
  * All of these attributes must be available on the global object for the current environment
  * to be considered a DOM environment (browser)
  */
-var isDom = typeof window === 'object' &&
+const isDom = typeof window === 'object' &&
   'document' in window &&
   'navigator' in window &&
   'HTMLElement' in window;
 /* eslint-enable */
 
-var symbolExists = typeof Symbol !== 'undefined';
-var mapExists = typeof Map !== 'undefined';
-var setExists = typeof Set !== 'undefined';
-var weakMapExists = typeof WeakMap !== 'undefined';
-var weakSetExists = typeof WeakSet !== 'undefined';
-var dataViewExists = typeof DataView !== 'undefined';
-var symbolIteratorExists = symbolExists && typeof Symbol.iterator !== 'undefined';
-var symbolToStringTagExists = symbolExists && typeof Symbol.toStringTag !== 'undefined';
-var setEntriesExists = setExists && typeof Set.prototype.entries === 'function';
-var mapEntriesExists = mapExists && typeof Map.prototype.entries === 'function';
-var setIteratorPrototype = setEntriesExists && Object.getPrototypeOf(new Set().entries());
-var mapIteratorPrototype = mapEntriesExists && Object.getPrototypeOf(new Map().entries());
-var arrayIteratorExists = symbolIteratorExists && typeof Array.prototype[Symbol.iterator] === 'function';
-var arrayIteratorPrototype = arrayIteratorExists && Object.getPrototypeOf([][Symbol.iterator]());
-var stringIteratorExists = symbolIteratorExists && typeof String.prototype[Symbol.iterator] === 'function';
-var stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
-var toStringLeftSliceLength = 8;
-var toStringRightSliceLength = -1;
+const symbolExists = typeof Symbol !== 'undefined';
+const mapExists = typeof Map !== 'undefined';
+const setExists = typeof Set !== 'undefined';
+const weakMapExists = typeof WeakMap !== 'undefined';
+const weakSetExists = typeof WeakSet !== 'undefined';
+const dataViewExists = typeof DataView !== 'undefined';
+const symbolIteratorExists = symbolExists && typeof Symbol.iterator !== 'undefined';
+const symbolToStringTagExists = symbolExists && typeof Symbol.toStringTag !== 'undefined';
+const setEntriesExists = setExists && typeof Set.prototype.entries === 'function';
+const mapEntriesExists = mapExists && typeof Map.prototype.entries === 'function';
+const setIteratorPrototype = setEntriesExists && Object.getPrototypeOf(new Set().entries());
+const mapIteratorPrototype = mapEntriesExists && Object.getPrototypeOf(new Map().entries());
+const arrayIteratorExists = symbolIteratorExists && typeof Array.prototype[Symbol.iterator] === 'function';
+const arrayIteratorPrototype = arrayIteratorExists && Object.getPrototypeOf([][Symbol.iterator]());
+const stringIteratorExists = symbolIteratorExists && typeof String.prototype[Symbol.iterator] === 'function';
+const stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
+const toStringLeftSliceLength = 8;
+const toStringRightSliceLength = -1;
 /**
  * ### typeOf (obj)
  *
@@ -48,7 +46,7 @@ var toStringRightSliceLength = -1;
  * @return {String} object type
  * @api public
  */
-module.exports = function typeDetect(obj) {
+export default function typeDetect(obj) {
   /* ! Speed optimisation
    * Pre:
    *   string literal     x 3,039,035 ops/sec ±1.62% (78 runs sampled)
@@ -63,7 +61,7 @@ module.exports = function typeDetect(obj) {
    *   undefined          x 32,363,368 ops/sec ±1.07% (82 runs sampled)
    *   function           x 31,296,870 ops/sec ±0.96% (83 runs sampled)
    */
-  var typeofObj = typeof obj;
+  const typeofObj = typeof obj;
   if (typeofObj !== 'object') {
     return typeofObj;
   }
@@ -231,12 +229,12 @@ module.exports = function typeDetect(obj) {
   *   Int8Array          x 6,606,078 ops/sec ±1.74% (81 runs sampled)
   *   Uint8ClampedArray  x 6,602,224 ops/sec ±1.77% (83 runs sampled)
   */
-  var stringTag = (symbolToStringTagExists && obj[Symbol.toStringTag]);
+  const stringTag = (symbolToStringTagExists && obj[Symbol.toStringTag]);
   if (typeof stringTag === 'string') {
     return stringTag;
   }
 
-  var objPrototype = Object.getPrototypeOf(obj);
+  const objPrototype = Object.getPrototypeOf(obj);
   /* ! Speed optimisation
   * Pre:
   *   regex literal      x 1,772,385 ops/sec ±1.85% (77 runs sampled)
@@ -377,6 +375,4 @@ module.exports = function typeDetect(obj) {
     .toString
     .call(obj)
     .slice(toStringLeftSliceLength, toStringRightSliceLength);
-};
-
-module.exports.typeDetect = module.exports;
+}

@@ -1,177 +1,175 @@
-'use strict';
-
-var assert = require('simple-assert');
-var type = require('..');
+import assert from 'simple-assert';
+import type from '..';
 function describeIf(condition) {
   return condition ? describe : describe.skip;
 }
 function itIf(condition) {
   return condition ? it : it.skip;
 }
-describeIf(typeof window !== 'undefined' && typeof window.document !== 'undefined')('DOM Specific', function () {
+describeIf(typeof window !== 'undefined' && typeof window.document !== 'undefined')('DOM Specific', () => {
 
-  it('window', function () {
+  it('window', () => {
     assert(type(window) === 'global');
   });
 
-  it('document', function () {
+  it('document', () => {
     assert(type(document) === 'Document');
   });
 
-  it('domparser', function () {
+  it('domparser', () => {
     assert(type(new DOMParser()) === 'DOMParser');
   });
 
-  it('history', function () {
+  it('history', () => {
     assert(type(window.history) === 'History');
   });
 
-  it('location', function () {
+  it('location', () => {
     assert(type(window.location) === 'Location');
   });
 
-  it('attr', function () {
-    var div = document.createElement('div');
+  it('attr', () => {
+    const div = document.createElement('div');
     div.setAttribute('id', 'foo');
     assert(type(div.getAttributeNode('id')) === 'Attr');
   });
 
-  describe('Events', function () {
+  describe('Events', () => {
 
-    it('event', function () {
+    it('event', () => {
       assert(type(document.createEvent('Event')) === 'Event');
     });
 
-    itIf(typeof HashChangeEvent !== 'undefined')('HashChangeEvent', function () {
+    itIf(typeof HashChangeEvent !== 'undefined')('HashChangeEvent', () => {
       assert(type(new HashChangeEvent('')) === 'HashChangeEvent');
     });
 
   });
 
-  describe('Navigator', function () {
+  describe('Navigator', () => {
 
-    it('navigator', function () {
+    it('navigator', () => {
       assert(type(window.navigator) === 'Navigator');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'geolocation' in navigator)('geolocation', function () {
+    itIf(typeof navigator !== 'undefined' && 'geolocation' in navigator)('geolocation', () => {
       assert(type(navigator.geolocation) === 'Geolocation');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'connection' in navigator)('networkinformation', function () {
+    itIf(typeof navigator !== 'undefined' && 'connection' in navigator)('networkinformation', () => {
       assert(type(navigator.connection) === 'NetworkInformation');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'mediaDevices' in navigator)('mediadevices', function () {
+    itIf(typeof navigator !== 'undefined' && 'mediaDevices' in navigator)('mediadevices', () => {
       assert(type(navigator.mediaDevices) === 'MediaDevices');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'mimeTypes' in navigator)('mimetypearray', function () {
+    itIf(typeof navigator !== 'undefined' && 'mimeTypes' in navigator)('mimetypearray', () => {
       assert(type(navigator.mimeTypes) === 'MimeTypeArray');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'nfc' in navigator)('nfc', function () {
+    itIf(typeof navigator !== 'undefined' && 'nfc' in navigator)('nfc', () => {
       assert(type(navigator.nfc) === 'NFC');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'permissions' in navigator)('permissions', function () {
+    itIf(typeof navigator !== 'undefined' && 'permissions' in navigator)('permissions', () => {
       assert(type(navigator.permissions) === 'Permissions');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'plugins' in navigator)('pluginarray', function () {
+    itIf(typeof navigator !== 'undefined' && 'plugins' in navigator)('pluginarray', () => {
       assert(type(navigator.plugins) === 'PluginArray');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'plugins' in navigator && navigator.plugins.length)('plugin', function () {
+    itIf(typeof navigator !== 'undefined' && 'plugins' in navigator && navigator.plugins.length)('plugin', () => {
       assert(type(navigator.plugins[0]) === 'Plugin');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'presentation' in navigator)('presentation', function () {
+    itIf(typeof navigator !== 'undefined' && 'presentation' in navigator)('presentation', () => {
       assert(type(navigator.presentation) === 'Presentation');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'serviceworker' in navigator)('serviceworkercontainer', function () {
+    itIf(typeof navigator !== 'undefined' && 'serviceworker' in navigator)('serviceworkercontainer', () => {
       assert(type(navigator.serviceworker) === 'ServiceWorkerContainer');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'services' in navigator)('serviceportcollection', function () {
+    itIf(typeof navigator !== 'undefined' && 'services' in navigator)('serviceportcollection', () => {
       assert(type(navigator.services) === 'ServicePortCollection');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'storage' in navigator)('storagemanager', function () {
+    itIf(typeof navigator !== 'undefined' && 'storage' in navigator)('storagemanager', () => {
       assert(type(navigator.storage) === 'StorageManager');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'storageQuota' in navigator)('storagequota', function () {
+    itIf(typeof navigator !== 'undefined' && 'storageQuota' in navigator)('storagequota', () => {
       assert(type(navigator.storageQuota) === 'StorageQuota');
     });
 
-    itIf(typeof navigator !== 'undefined' && 'usb' in navigator)('usb', function () {
+    itIf(typeof navigator !== 'undefined' && 'usb' in navigator)('usb', () => {
       assert(type(navigator.usb) === 'USB');
     });
 
   });
 
-  describe('(HTMLElements)', function () {
+  describe('(HTMLElements)', () => {
 
-    it('HTMLAreaElement', function () {
+    it('HTMLAreaElement', () => {
       assert(type(document.createElement('Area')) === 'HTMLAreaElement');
     });
 
-    it('HTMLBRElement', function () {
+    it('HTMLBRElement', () => {
       assert(type(document.createElement('BR')) === 'HTMLBRElement');
     });
 
-    it('HTMLBaseElement', function () {
+    it('HTMLBaseElement', () => {
       assert(type(document.createElement('Base')) === 'HTMLBaseElement');
     });
 
-    it('HTMLBodyElement', function () {
+    it('HTMLBodyElement', () => {
       assert(type(document.createElement('Body')) === 'HTMLBodyElement');
     });
 
-    it('HTMLButtonElement', function () {
+    it('HTMLButtonElement', () => {
       assert(type(document.createElement('Button')) === 'HTMLButtonElement');
     });
 
-    it('HTMLCanvasElement', function () {
+    it('HTMLCanvasElement', () => {
       assert(type(document.createElement('Canvas')) === 'HTMLCanvasElement');
     });
 
-    it('HTMLDListElement', function () {
+    it('HTMLDListElement', () => {
       assert(type(document.createElement('DL')) === 'HTMLDListElement');
     });
 
     // not yet supported in Safari
-    itIf(typeof HTMLDataListElement === 'function')('HTMLDataListElement', function () {
+    itIf(typeof HTMLDataListElement === 'function')('HTMLDataListElement', () => {
       assert(type(document.createElement('DataList')) === 'HTMLDataListElement');
     });
 
-    it('HTMLDivElement', function () {
+    it('HTMLDivElement', () => {
       assert(type(document.createElement('Div')) === 'HTMLDivElement');
     });
 
-    it('HTMLFieldSetElement', function () {
+    it('HTMLFieldSetElement', () => {
       assert(type(document.createElement('FieldSet')) === 'HTMLFieldSetElement');
     });
 
-    it('HTMLFormElement', function () {
+    it('HTMLFormElement', () => {
       assert(type(document.createElement('Form')) === 'HTMLFormElement');
     });
 
-    it('HTMLFrameSetElement', function () {
+    it('HTMLFrameSetElement', () => {
       assert(type(document.createElement('FrameSet')) === 'HTMLFrameSetElement');
     });
 
-    it('HTMLHRElement', function () {
+    it('HTMLHRElement', () => {
       assert(type(document.createElement('HR')) === 'HTMLHRElement');
     });
 
-    it('HTMLHeadElement', function () {
+    it('HTMLHeadElement', () => {
       assert(type(document.createElement('Head')) === 'HTMLHeadElement');
     });
 
-    it('HTMLHeadingElement', function () {
+    it('HTMLHeadingElement', () => {
       assert(type(document.createElement('H1')) === 'HTMLHeadingElement');
       assert(type(document.createElement('H2')) === 'HTMLHeadingElement');
       assert(type(document.createElement('H3')) === 'HTMLHeadingElement');
@@ -180,151 +178,151 @@ describeIf(typeof window !== 'undefined' && typeof window.document !== 'undefine
       assert(type(document.createElement('H6')) === 'HTMLHeadingElement');
     });
 
-    it('HTMLHtmlElement', function () {
+    it('HTMLHtmlElement', () => {
       assert(type(document.createElement('Html')) === 'HTMLHtmlElement');
     });
 
-    it('HTMLIFrameElement', function () {
+    it('HTMLIFrameElement', () => {
       assert(type(document.createElement('IFrame')) === 'HTMLIFrameElement');
     });
 
-    it('HTMLImageElement', function () {
+    it('HTMLImageElement', () => {
       assert(type(document.createElement('Img')) === 'HTMLImageElement');
     });
 
-    it('HTMLInputElement', function () {
+    it('HTMLInputElement', () => {
       assert(type(document.createElement('Input')) === 'HTMLInputElement');
     });
 
-    it('HTMLLIElement', function () {
+    it('HTMLLIElement', () => {
       assert(type(document.createElement('LI')) === 'HTMLLIElement');
     });
 
-    it('HTMLLabelElement', function () {
+    it('HTMLLabelElement', () => {
       assert(type(document.createElement('Label')) === 'HTMLLabelElement');
     });
 
-    it('HTMLLegendElement', function () {
+    it('HTMLLegendElement', () => {
       assert(type(document.createElement('Legend')) === 'HTMLLegendElement');
     });
 
-    it('HTMLLinkElement', function () {
+    it('HTMLLinkElement', () => {
       assert(type(document.createElement('Link')) === 'HTMLLinkElement');
     });
 
-    it('HTMLMapElement', function () {
+    it('HTMLMapElement', () => {
       assert(type(document.createElement('Map')) === 'HTMLMapElement');
     });
 
-    it('HTMLMetaElement', function () {
+    it('HTMLMetaElement', () => {
       assert(type(document.createElement('Meta')) === 'HTMLMetaElement');
     });
 
-    itIf(typeof HTMLMeterElement !== 'undefined')('HTMLMeterElement', function () {
+    itIf(typeof HTMLMeterElement !== 'undefined')('HTMLMeterElement', () => {
       assert(type(document.createElement('Meter')) === 'HTMLMeterElement');
     });
 
-    it('HTMLModElement', function () {
+    it('HTMLModElement', () => {
       assert(type(document.createElement('Del')) === 'HTMLModElement');
     });
 
-    it('HTMLOListElement', function () {
+    it('HTMLOListElement', () => {
       assert(type(document.createElement('OL')) === 'HTMLOListElement');
     });
 
-    it('HTMLOptGroupElement', function () {
+    it('HTMLOptGroupElement', () => {
       assert(type(document.createElement('OptGroup')) === 'HTMLOptGroupElement');
     });
 
-    it('HTMLOptionElement', function () {
+    it('HTMLOptionElement', () => {
       assert(type(document.createElement('Option')) === 'HTMLOptionElement');
     });
 
-    itIf(typeof HTMLOutputElement !== 'undefined')('HTMLOutputElement', function () {
+    itIf(typeof HTMLOutputElement !== 'undefined')('HTMLOutputElement', () => {
       assert(type(document.createElement('Output')) === 'HTMLOutputElement');
     });
 
-    it('HTMLParagraphElement', function () {
+    it('HTMLParagraphElement', () => {
       assert(type(document.createElement('P')) === 'HTMLParagraphElement');
     });
 
-    it('HTMLParamElement', function () {
+    it('HTMLParamElement', () => {
       assert(type(document.createElement('Param')) === 'HTMLParamElement');
     });
 
-    it('HTMLPreElement', function () {
+    it('HTMLPreElement', () => {
       assert(type(document.createElement('Pre')) === 'HTMLPreElement');
     });
 
-    itIf(typeof HTMLProgressElement !== 'undefined')('HTMLProgressElement', function () {
+    itIf(typeof HTMLProgressElement !== 'undefined')('HTMLProgressElement', () => {
       assert(type(document.createElement('Progress')) === 'HTMLProgressElement');
     });
 
-    it('HTMLQuoteElement', function () {
+    it('HTMLQuoteElement', () => {
       assert(type(document.createElement('BlockQuote')) === 'HTMLQuoteElement');
       assert(type(document.createElement('Q')) === 'HTMLQuoteElement');
     });
 
-    it('HTMLScriptElement', function () {
+    it('HTMLScriptElement', () => {
       assert(type(document.createElement('Script')) === 'HTMLScriptElement');
     });
 
-    it('HTMLSelectElement', function () {
+    it('HTMLSelectElement', () => {
       assert(type(document.createElement('Select')) === 'HTMLSelectElement');
     });
 
-    it('HTMLSpanElement', function () {
+    it('HTMLSpanElement', () => {
       assert(type(document.createElement('Span')) === 'HTMLSpanElement');
     });
 
-    it('HTMLStyleElement', function () {
+    it('HTMLStyleElement', () => {
       assert(type(document.createElement('Style')) === 'HTMLStyleElement');
     });
 
-    it('HTMLTableCaptionElement', function () {
+    it('HTMLTableCaptionElement', () => {
       assert(type(document.createElement('Caption')) === 'HTMLTableCaptionElement');
     });
 
-    it('HTMLTableDataCellElement', function () {
+    it('HTMLTableDataCellElement', () => {
       assert(type(document.createElement('TD')) === 'HTMLTableDataCellElement');
     });
 
-    it('HTMLTableHeaderCellElement', function () {
+    it('HTMLTableHeaderCellElement', () => {
       assert(type(document.createElement('TH')) === 'HTMLTableHeaderCellElement');
     });
 
-    it('HTMLTableColElement', function () {
+    it('HTMLTableColElement', () => {
       assert(type(document.createElement('Col')) === 'HTMLTableColElement');
       assert(type(document.createElement('ColGroup')) === 'HTMLTableColElement');
     });
 
-    it('HTMLTableElement', function () {
+    it('HTMLTableElement', () => {
       assert(type(document.createElement('Table')) === 'HTMLTableElement');
     });
 
-    it('HTMLTableRowElement', function () {
+    it('HTMLTableRowElement', () => {
       assert(type(document.createElement('TR')) === 'HTMLTableRowElement');
     });
 
-    it('HTMLTableSectionElement', function () {
+    it('HTMLTableSectionElement', () => {
       assert(type(document.createElement('THead')) === 'HTMLTableSectionElement');
       assert(type(document.createElement('TBody')) === 'HTMLTableSectionElement');
       assert(type(document.createElement('TFoot')) === 'HTMLTableSectionElement');
     });
 
-    it('HTMLTextAreaElement', function () {
+    it('HTMLTextAreaElement', () => {
       assert(type(document.createElement('TextArea')) === 'HTMLTextAreaElement');
     });
 
-    it('HTMLTitleElement', function () {
+    it('HTMLTitleElement', () => {
       assert(type(document.createElement('Title')) === 'HTMLTitleElement');
     });
 
-    it('HTMLUListElement', function () {
+    it('HTMLUListElement', () => {
       assert(type(document.createElement('UL')) === 'HTMLUListElement');
     });
 
-    it('HTMLUnknownElement', function () {
+    it('HTMLUnknownElement', () => {
       assert(type(document.createElement('foobarbaz')) === 'HTMLUnknownElement');
     });
 

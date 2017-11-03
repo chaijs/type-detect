@@ -1,9 +1,7 @@
-'use strict';
-
-var typeDetect = require('../');
-var Benchmark = require('benchmark');
-var benches = [];
-var fixtures = {
+import typeDetect from '../';
+import Benchmark from 'benchmark';
+const benches = [];
+const fixtures = {
   'string literal    ': '',
   'array literal     ': [],
   'boolean literal   ': true,
@@ -14,9 +12,9 @@ var fixtures = {
   'promise           ': Promise.resolve(),
   'null              ': null,
   'undefined         ': undefined,
-  'function          ': function () {},
+  'function          '() {},
 
-  'buffer            ': new Buffer(1),
+  'buffer            ': Buffer.from(1),
   'date              ': new Date(),
   'error             ': new Error(),
   'map               ': new Map(),
@@ -39,12 +37,9 @@ try {
 } catch (error) {
   console.error('cannot benchmark generator functions');
 }
-[
-  'Float64Array', 'Float32Array',
-  'Uint32Array', 'Uint16Array', 'Uint8Array',
-  'Int32Array', 'Int16Array', 'Int8Array',
-  'Uint8ClampedArray',
-].forEach(function (value) {
+const arrayTypes = [ 'Float64', 'Float32', 'Uint32', 'Uint16', 'Uint8', 'Int32', 'Int16', 'Int8', 'Uint8Clamped' ];
+arrayTypes.forEach((value) => {
+  value += 'Array';
   if (typeof global[value] === 'function') {
     fixtures[value + new Array(19 - value.length).join(' ')] = new (global[value])(1);
   }
@@ -53,15 +48,13 @@ if (typeof DataView === 'function') {
   fixtures['DataView          '] = new DataView(new ArrayBuffer(1));
 }
 
-var filter = process.argv[2] || '';
-Object.keys(fixtures).filter(function (key) {
-  return key.indexOf(filter) !== -1;
-}).forEach(function (test) {
+const filter = process.argv[2] || '';
+Object.keys(fixtures).filter((key) => key.indexOf(filter) !== -1).forEach((test) => {
   benches.push(new Benchmark(test, {
-    fn: function () {
+    fn() {
       typeDetect(fixtures[test]);
     },
-    onCycle: function (event) {
+    onCycle(event) {
       process.stdout.clearLine();
       process.stdout.cursorTo(0);
       process.stdout.write(event.target.toString());

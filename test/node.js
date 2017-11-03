@@ -1,18 +1,16 @@
-'use strict';
-
-var assert = require('simple-assert');
-var type = require('..');
-var isNode = typeof process !== 'undefined' && typeof process.release === 'object' && process.release.name;
+import assert from 'simple-assert';
+import type from '..';
+const isNode = typeof process !== 'undefined' && typeof process.release === 'object' && process.release.name;
 function describeIf(condition) {
   return condition ? describe : describe.skip;
 }
-describeIf(isNode)('Node Specific', function () {
+describeIf(isNode)('Node Specific', () => {
 
-  it('global', function () {
+  it('global', () => {
     assert(type(global) === 'global');
   });
 
-  it('process', function () {
+  it('process', () => {
     assert(type(process) === 'process');
   });
 
