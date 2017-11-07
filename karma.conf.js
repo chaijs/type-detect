@@ -8,9 +8,9 @@ let startConnect = false;
 const reporters = [ 'progress', 'coverage' ];
 const tags = [ `${ packageJson.name }@${ packageJson.version }` ];
 const frameworks = [ 'mocha' ];
-
 const debug = Boolean(process.env.npm_config_debug);
-if (process.env.SAUCE_ACCESS_KEY && process.env.SAUCE_USERNAME) {
+
+if (process.env.SAUCE_USERNAME) {
   browsers = [ 'SauceEdgeLatest', 'SauceInternetExplorerTen', 'SauceSafariLatest' ];
   tags.push(`${ process.env.SAUCE_USERNAME }@${ branch }`);
   reporters.push('saucelabs');

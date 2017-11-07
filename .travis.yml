@@ -28,15 +28,15 @@ jobs:
         - QUICKLY_TEST_BROWSERS_AVAILABLE_IN_CI=1 # kept here for easier reading of build log
     - stage: test
       addons:
-        sauce_connect: true
+        sauce_connect:
+          username: "chaijs-type-detect"
+        jwt:
+          secure: "GhkIK785QJbB1G5qwf51zpoJkHibS8wBhibID2jCL6TmQ8ZUHmihN2qnjuRvCI80uosHqkCBi3CeBYZIika5QFsg6LVVf5dnme7Qs0UkG+mw45yO6vcKycxbn1Bo5X8hqdtSjF/x+C91Wr4lelr5w/Sq2X7RokfE0fDVdklE5xQ="
       script:
-        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ -z "$SAUCE_USERNAME" ]; then echo "Cannot run tests without SAUCE_USERNAME"; exit 1; fi'
-        - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "SauceLabs tests do not run in builds of pull requests. This build will now exit"; exit 0; fi'
-        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ -n "$SAUCE_USERNAME" ]; then npm run test:browser; fi'
+        - npm run test:browser
       env:
         - TEST_BROWSERS_IN_SAUCELABS=1 # kept here for easier reading of build log
-        - secure: AgiUWRCNP2z0oHCjdm3lk4YawBOQz8Q4DOrzOR3tDt2fSWo2t40cynfGJlQwpFmTvec5G04lO9bEC9/yoW7xAS0ysu5p7utngXaKtKDoq3Zr0aYLLLsCv/0PAv1YstMyo/mRbRetxob76wUFcrbB3r5alIF5YW1JCmj/O9bvdUQ=
-        - secure: TepAZmznoPWUX12snu2eb7Sni+31tiOO6ZeU3wovrhCpGzykBNr6xAvUklr88L+uKtvfsTq8sipX0jtZvL7lcIEzujirTpjaj4QV5mUFiV2N40o+C3LdNmfmU9dhUcXRu9vMSs9uc7YfPers4We8X99UxTHxljK7VyJe39ULpRk=
+        - SAUCE_USERNAME="chaijs-type-detect"
         - SAUCE_CONNECT_READY_FILE=/tmp/sauce-connect-ready
     - stage: test
       node_js: 8 # to be removed 2019-12-01
