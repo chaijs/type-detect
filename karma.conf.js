@@ -32,6 +32,8 @@ if (process.env.APPVEYOR) {
   branch = process.env.TRAVIS_BRANCH;
   build = `travis@${ process.env.TRAVIS_JOB_NUMBER }`;
   job = process.env.TRAVIS_JOB_NUMBER;
+  // Travis has its own saucelabs connect process, so ensure karma won't run it
+  startConnect = false;
 }
 /* eslint-enable */
 
