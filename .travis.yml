@@ -64,8 +64,10 @@ jobs:
         - if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ "$TRAVIS_BRANCH" != "master" ]; then echo "the deploy job only runs for the master branch. This build will now exit"; exit 0; fi
         - if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "master" ]; then npm run semantic-release; fi
       env:
-      - secure: fakflt6DaPW9NYFdUpTfQGoKFt5F1EZeSiGqWeTCZ3+VDiEC/d9rPf7JfHkDklpr4swEW7ovbfV4PHp+MeT+jje8eQAezbhdT8hAmChykeTKKfgvifMwQp6TD3DQVrf6cJqqZfkJkkzuYJjGivZ8FA4KXTglyBrjozM8KH675UU=
-      - secure: bE+qM+B4dA+oQSfHo4BM9NVU5LCdgkEmfThfmIp3kmX19RO/1R1dlu18M1rVyDUNaqFUwCsq/W/9a+Dv1r+7knmfmJoUKuXCcIjn6WBs4Pd2kPwjCjvQ+5RWTw67v44de78AFb3IH7dT2H+fhgeHrfaI3NIV27BlKx6OqTnqDRY=
+       # GH_TOKEN type-detect travis 
+       - secure: "MPzfTVm7U1Q/eYhHT3DXwZki5Xn4ODNs/uXEM5PB2m+BxbytaAgU+3JSI0ZREv+JLk9CRnj2yWebaQkm+0ompkPRus0pEFuwEsMJ3HqV4ISj6zWGLPNjeJqy6kGa+m1WlkfHM+Spj7vrmk2yclZsmke4xpeQy9W8nnPDEHe6uoQ="
+       # NPM_TOKEN …7f80442b
+       - secure: "EM+nNOeL3X6Cz5u5aaBKZU6FqXrQVgKO543zy6CL3+Im/Esz2um9S2Ymgw9nzBH35SczhJh4Avfw7sujRdyHPL5XLbCWj2954TThsO8Ue62Xs/K3lQT6x8+iQc0jRZFtBkwX2sQjWFah04j381sKeTFFH94jifeW8dFOXXtWZfs="
 
 env:
   global:
