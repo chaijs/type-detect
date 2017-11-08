@@ -9,8 +9,16 @@
   "license": "MIT",
   "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
   "contributors": [
-    "David Losert (https://github.com/davelosert)",
     "Keith Cirkel (https://github.com/keithamus)",
+    "David Losert (https://github.com/davelosert)",
+    "Aleksey Shvayka (https://github.com/shvaikalesh)",
+    "Lucas Fernandes da Costa (https://github.com/lucasfcosta)",
+    "Grant Snodgrass (https://github.com/meeber)",
+    "Jeremy Tice (https://github.com/jetpacmonkey)",
+    "Edward Betts (https://github.com/EdwardBetts)",
+    "dvlsg (https://github.com/dvlsg)",
+    "Amila Welihinda (https://github.com/amilajack)",
+    "Jake Champion (https://github.com/JakeChampion)",
     "Miroslav Bajtoš (https://github.com/bajtos)"
   ],
   "files": [
