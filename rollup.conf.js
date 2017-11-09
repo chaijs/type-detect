@@ -14,7 +14,7 @@ export default {
   output: {
     file: env === 'test' ? 'type-detect.test.js' : 'type-detect.js',
     name: 'typeDetect',
-    format: 'iife',
+    format: 'cjs',
   },
   plugins,
 };

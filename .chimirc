@@ -1,0 +1,13 @@
+{
+  "dependencies": [
+    "assert",
+    {
+      "name": "type",
+      "module": "./type-detect.js"
+    }
+  ],
+  "globals": {
+    "arrayBuffer": "new ArrayBuffer()",
+    "callback": "function () {}"
+  }
+}

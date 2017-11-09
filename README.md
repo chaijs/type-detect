@@ -114,7 +114,7 @@ You can also use it within the browser; install via npm and use the `type-detect
 
 The primary export of `type-detect` is function that can serve as a replacement for `typeof`. The results of this function will be more specific than that of native `typeof`.
 
-```js
+```js (skip)
 var type = require('type-detect');
 ```
 
@@ -200,19 +200,19 @@ assert(type(new Object) === 'Object');
 All new ECMAScript 2015 objects are also supported, such as Promises and Symbols:
 
 ```js
-assert(type(new Map() === 'Map');
+assert(type(new Map() === 'Map'));
 assert(type(new WeakMap()) === 'WeakMap');
 assert(type(new Set()) === 'Set');
 assert(type(new WeakSet()) === 'WeakSet');
 assert(type(Symbol()) === 'symbol');
-assert(type(new Promise(callback) === 'Promise');
+assert(type(new Promise(callback) === 'Promise'));
 assert(type(new Int8Array()) === 'Int8Array');
 assert(type(new Uint8Array()) === 'Uint8Array');
-assert(type(new UInt8ClampedArray()) === 'Uint8ClampedArray');
+assert(type(new Uint8ClampedArray()) === 'Uint8ClampedArray');
 assert(type(new Int16Array()) === 'Int16Array');
 assert(type(new Uint16Array()) === 'Uint16Array');
 assert(type(new Int32Array()) === 'Int32Array');
-assert(type(new UInt32Array()) === 'Uint32Array');
+assert(type(new Uint32Array()) === 'Uint32Array');
 assert(type(new Float32Array()) === 'Float32Array');
 assert(type(new Float64Array()) === 'Float64Array');
 assert(type(new ArrayBuffer()) === 'ArrayBuffer');

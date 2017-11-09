@@ -25,6 +25,7 @@
   "scripts": {
     "bench": "node bench",
     "build": "rollup -c rollup.conf.js",
+    "chimi": "chimi",
     "commit-msg": "commitlint -x angular",
     "lint": "eslint --ignore-path .gitignore .",
     "prepare": "cross-env NODE_ENV=production npm run build",
@@ -58,6 +59,7 @@
     "@commitlint/cli": "^4.2.2",
     "benchmark": "^2.1.0",
     "buble": "^0.16.0",
+    "chimi": "^0.1.1",
     "codecov": "^3.0.0",
     "commitlint-config-angular": "^4.2.1",
     "cross-env": "^5.1.1",
