@@ -17,7 +17,7 @@
     "index.js",
     "type-detect.js"
   ],
-  "main": "./index.js",
+  "main": "./type-detect.js",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/chaijs/type-detect.git"
