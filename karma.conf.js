@@ -18,7 +18,7 @@ if (process.env.SAUCE_USERNAME) {
 } else if (process.env.APPVEYOR) {
   browsers = [ 'Firefox', 'ChromeHeadless', 'IE' ];
 } else if (process.env.TRAVIS) {
-  browsers = [ 'FirefoxHeadless', 'ChromeHeadless' ];
+  browsers = [ 'FirefoxHeadless', 'ChromeHeadlessNoSandbox' ];
 } else if (!process.env.KARMA_MANUAL) {
   browsers = [];
   frameworks.push('detectBrowsers');
@@ -52,6 +52,10 @@ module.exports = function configureKarma(config) {
       dir: 'coverage',
     },
     customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: [ '--no-sandbox' ],
+      },
       FirefoxHeadless: {
         base: 'Firefox',
         flags: [ '-headless' ],
