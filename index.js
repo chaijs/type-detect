@@ -26,14 +26,6 @@ const stringIteratorExists = symbolIteratorExists && typeof String.prototype[Sym
 const stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
 const toStringLeftSliceLength = 8;
 const toStringRightSliceLength = -1;
-const windowExists = typeof window === 'object';
-const windowLocationExists = windowExists && typeof window.location === 'object';
-const windowDocumentExists = windowExists && typeof window.document === 'object';
-const windowNavigatorExists = windowExists && typeof window.navigator === 'object';
-const windowNavigatorMimeTypesExists = windowNavigatorExists && typeof window.navigator.mimeTypes === 'object';
-const windowNavigatorPluginsExists = windowNavigatorExists && typeof window.navigator.plugins === 'object';
-const windowHTMLElementExists = windowExists &&
-  (typeof window.HTMLElement === 'function' || typeof window.HTMLElement === 'object');
 /**
  * ### typeOf (obj)
  *
@@ -107,7 +99,9 @@ export default function typeDetect(obj) {
     return 'Array';
   }
 
-  if (windowExists) {
+  // Not caching existence of `window` and related properties due to potential
+  // for `window` to be unset before tests in quasi-browser environments.
+  if (typeof window === 'object') {
     /* ! Spec Conformance
      * (https://html.spec.whatwg.org/multipage/browsers.html#location)
      * WhatWG HTML$7.7.3 - The `Location` interface
@@ -115,7 +109,7 @@ export default function typeDetect(obj) {
      *  - IE <=11 === "[object Object]"
      *  - IE Edge <=13 === "[object Object]"
      */
-    if (windowLocationExists && obj === window.location) {
+    if (typeof window.location === 'object' && obj === window.location) {
       return 'Location';
     }
 
@@ -138,31 +132,37 @@ export default function typeDetect(obj) {
      *  - IE 11 === "[object HTMLDocument]"
      *  - IE Edge <=13 === "[object HTMLDocument]"
      */
-    if (windowDocumentExists && obj === window.document) {
+    if (typeof window.document === 'object' && obj === window.document) {
       return 'Document';
     }
 
-    /* ! Spec Conformance
-     * (https://html.spec.whatwg.org/multipage/webappapis.html#mimetypearray)
-     * WhatWG HTML$8.6.1.5 - Plugins - Interface MimeTypeArray
-     * Test: `Object.prototype.toString.call(navigator.mimeTypes)``
-     *  - IE <=10 === "[object MSMimeTypesCollection]"
-     */
-    if (windowNavigatorMimeTypesExists && obj === window.navigator.mimeTypes) {
-      return 'MimeTypeArray';
+    if (typeof window.navigator === 'object') {
+      /* ! Spec Conformance
+       * (https://html.spec.whatwg.org/multipage/webappapis.html#mimetypearray)
+       * WhatWG HTML$8.6.1.5 - Plugins - Interface MimeTypeArray
+       * Test: `Object.prototype.toString.call(navigator.mimeTypes)``
+       *  - IE <=10 === "[object MSMimeTypesCollection]"
+       */
+      if (typeof window.navigator.mimeTypes === 'object' &&
+          obj === window.navigator.mimeTypes) {
+        return 'MimeTypeArray';
+      }
+
+      /* ! Spec Conformance
+       * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
+       * WhatWG HTML$8.6.1.5 - Plugins - Interface PluginArray
+       * Test: `Object.prototype.toString.call(navigator.plugins)``
+       *  - IE <=10 === "[object MSPluginsCollection]"
+       */
+      if (typeof window.navigator.plugins === 'object' &&
+          obj === window.navigator.plugins) {
+        return 'PluginArray';
+      }
     }
 
-    /* ! Spec Conformance
-     * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
-     * WhatWG HTML$8.6.1.5 - Plugins - Interface PluginArray
-     * Test: `Object.prototype.toString.call(navigator.plugins)``
-     *  - IE <=10 === "[object MSPluginsCollection]"
-     */
-    if (windowNavigatorPluginsExists && obj === window.navigator.plugins) {
-      return 'PluginArray';
-    }
-
-    if (windowHTMLElementExists && obj instanceof window.HTMLElement) {
+    if ((typeof window.HTMLElement === 'function' ||
+        typeof window.HTMLElement === 'object') &&
+        obj instanceof window.HTMLElement) {
       /* ! Spec Conformance
       * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
       * WhatWG HTML$4.4.4 - The `blockquote` element - Interface `HTMLQuoteElement`
