@@ -101,7 +101,7 @@ export default function typeDetect(obj) {
 
   // Not caching existence of `window` and related properties due to potential
   // for `window` to be unset before tests in quasi-browser environments.
-  if (typeof window === 'object') {
+  if (typeof window === 'object' && window !== null) {
     /* ! Spec Conformance
      * (https://html.spec.whatwg.org/multipage/browsers.html#location)
      * WhatWG HTML$7.7.3 - The `Location` interface
