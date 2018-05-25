@@ -19,10 +19,6 @@ jobs:
       addons:
         chrome: stable
         firefox: latest
-      before_script:
-        - "export DISPLAY=:99.0"
-        - "sh -e /etc/init.d/xvfb start"
-        - sleep 3 # give xvfb some time to start
       script: npm run test:browser
       env:
         - QUICKLY_TEST_BROWSERS_AVAILABLE_IN_CI=1 # kept here for easier reading of build log
