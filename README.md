@@ -117,6 +117,10 @@ The primary export of `type-detect` is function that can serve as a replacement 
 ```js
 var type = require('type-detect');
 ```
+Or, in the browser use case, after the <script> tag,
+ ```js
+ var type = typeDetect;
+ ```
 
 #### array
 
