@@ -15,10 +15,10 @@
       src="https://img.shields.io/badge/license-mit-green.svg?style=flat-square"
     />
   </a>
-  <a href="https://github.com/chaijs/type-detect/releases">
+  <a href="https://www.npmjs.com/packages/type-detect">
     <img
-      alt="tag:?"
-      src="https://img.shields.io/github/tag/chaijs/type-detect.svg?style=flat-square"
+      alt="npm:?"
+      src="https://img.shields.io/npm/v/type-detect.svg?style=flat-square"
     />
   </a>
   <a href="https://travis-ci.org/chaijs/type-detect">
@@ -35,12 +35,6 @@
   </a>
   <a href="https://www.npmjs.com/packages/type-detect">
     <img
-      alt="npm:?"
-      src="https://img.shields.io/npm/v/type-detect.svg?style=flat-square"
-    />
-  </a>
-  <a href="https://www.npmjs.com/packages/type-detect">
-    <img
       alt="dependencies:?"
       src="https://img.shields.io/npm/dm/type-detect.svg?style=flat-square"
     />
@@ -51,22 +45,6 @@
       src="https://img.shields.io/david/chaijs/type-detect.svg?style=flat-square"
     />
   </a>
-  <br/>
-  <table>
-  <tr><th colspan=6>Supported Browsers</th></tr> <tr>
-  <th align=center><img src="https://camo.githubusercontent.com/ab586f11dfcb49bf5f2c2fa9adadc5e857de122a/687474703a2f2f73766773686172652e636f6d2f692f3278532e737667" alt=""> Chrome</th>
-  <th align=center><img src="https://camo.githubusercontent.com/98cca3108c18dcfaa62667b42046540c6822cdac/687474703a2f2f73766773686172652e636f6d2f692f3279352e737667" alt=""> Edge</th>
-  <th align=center><img src="https://camo.githubusercontent.com/acdcb09840a9e1442cbaf1b684f95ab3c3f41cf4/687474703a2f2f73766773686172652e636f6d2f692f3279462e737667" alt=""> Firefox</th>
-  <th align=center><img src="https://camo.githubusercontent.com/728f8cb0bee9ed58ab85e39266f1152c53e0dffd/687474703a2f2f73766773686172652e636f6d2f692f3278342e737667" alt=""> Safari</th>
-  <th align=center><img src="https://camo.githubusercontent.com/96a2317034dee0040d0a762e7a30c3c650c45aac/687474703a2f2f73766773686172652e636f6d2f692f3279532e737667" alt=""> IE</th>
-  </tr><tr>
-  <td align=center>✅</td>
-  <td align=center>✅</td>
-  <td align=center>✅</td>
-  <td align=center>✅</td>
-  <td align=center>9, 10, 11</td>
-  </tr>
-  </table>
   <br>
   <a href="https://chai-slack.herokuapp.com/">
     <img
@@ -81,6 +59,23 @@
     />
   </a>
 </p>
+<div align=center>
+  <table width="100%">
+  <tr><th colspan=6>Supported Browsers</th></tr> <tr>
+  <th align=center><img src="https://camo.githubusercontent.com/ab586f11dfcb49bf5f2c2fa9adadc5e857de122a/687474703a2f2f73766773686172652e636f6d2f692f3278532e737667" alt=""> Chrome</th>
+  <th align=center><img src="https://camo.githubusercontent.com/98cca3108c18dcfaa62667b42046540c6822cdac/687474703a2f2f73766773686172652e636f6d2f692f3279352e737667" alt=""> Edge</th>
+  <th align=center><img src="https://camo.githubusercontent.com/acdcb09840a9e1442cbaf1b684f95ab3c3f41cf4/687474703a2f2f73766773686172652e636f6d2f692f3279462e737667" alt=""> Firefox</th>
+  <th align=center><img src="https://camo.githubusercontent.com/728f8cb0bee9ed58ab85e39266f1152c53e0dffd/687474703a2f2f73766773686172652e636f6d2f692f3278342e737667" alt=""> Safari</th>
+  <th align=center><img src="https://camo.githubusercontent.com/96a2317034dee0040d0a762e7a30c3c650c45aac/687474703a2f2f73766773686172652e636f6d2f692f3279532e737667" alt=""> IE</th>
+  </tr><tr>
+  <td align=center>✅</td>
+  <td align=center>✅</td>
+  <td align=center>✅</td>
+  <td align=center>✅</td>
+  <td align=center>9, 10, 11</td>
+  </tr>
+  </table>
+</div>
 
 ## What is Type-Detect?
 
