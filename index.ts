@@ -5,8 +5,22 @@
  */
 const promiseExists = typeof Promise === 'function';
 
-/* eslint-disable no-undef */
-const globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
+const globalObject = ((Obj) => {
+  if (typeof globalThis === 'object') {
+    return globalThis; // eslint-disable-line
+  }
+  Object.defineProperty(Obj, 'typeDetectGlobalObject', {
+    get() {
+      return this;
+    },
+    configurable: true,
+  });
+  // @ts-ignore
+  const global = typeDetectGlobalObject; // eslint-disable-line
+  // @ts-ignore
+  delete Obj.typeDetectGlobalObject;
+  return global;
+})(Object.prototype);
 
 const symbolExists = typeof Symbol !== 'undefined';
 const mapExists = typeof Map !== 'undefined';
