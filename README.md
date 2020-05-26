@@ -107,7 +107,7 @@ Sadly, `Object.prototype.toString` is slow, and buggy. By slow - we mean it is s
 `type-detect` can be imported with the following line:
 
 ```js
-import type from 'https://raw.githubusercontent.com/chaijs/type-detect/v4.0.8/index.ts'
+import type from 'https://deno.land/x/type_detect@v4.0.8/index.js'
 ```
 
 ### Browsers
