@@ -44,6 +44,7 @@
     "test": "npm run test:node && npm run test:browser",
     "test:browser": "karma start --singleRun=true",
     "test:node": "nyc mocha type-detect.test.js",
+    "test:deno": "deno test test/deno-test.ts",
     "posttest:node": "nyc report --report-dir \"coverage/node-$(node --version)\" --reporter=lcovonly && npm run upload-coverage",
     "posttest:browser": "npm run upload-coverage",
     "upload-coverage": "codecov"

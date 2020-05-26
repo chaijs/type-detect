@@ -23,4 +23,6 @@ type-detect.test.js
 .nyc_output
 
 index.js
-index.d.ts
+*.d.ts
+
+test/deno-test.js
