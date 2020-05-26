@@ -23,6 +23,8 @@
   ],
   "files": [
     "index.js",
+    "index.ts",
+    "index.d.ts",
     "type-detect.js"
   ],
   "main": "./type-detect.js",
@@ -32,9 +34,9 @@
   },
   "scripts": {
     "bench": "node bench",
-    "build": "rollup -c rollup.conf.js",
+    "build": "tsc && rollup -c rollup.conf.js",
     "commit-msg": "commitlint -x angular",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore . --ext .js,.ts",
     "prepare": "cross-env NODE_ENV=production npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "pretest:node": "cross-env NODE_ENV=test npm run build",
@@ -47,6 +49,10 @@
     "upload-coverage": "codecov"
   },
   "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "env": {
       "es6": true
     },
@@ -54,7 +60,8 @@
       "strict/es6"
     ],
     "globals": {
-      "HTMLElement": false
+      "HTMLElement": false,
+      "window": false
     },
     "rules": {
       "complexity": 0,
@@ -64,12 +71,14 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^4.2.2",
+    "@typescript-eslint/eslint-plugin": "^3.0.1",
+    "@typescript-eslint/parser": "^3.0.1",
     "benchmark": "^2.1.0",
     "buble": "^0.16.0",
     "codecov": "^3.0.0",
     "commitlint-config-angular": "^4.2.1",
     "cross-env": "^5.1.1",
-    "eslint": "^4.10.0",
+    "eslint": "^7.1.0",
     "eslint-config-strict": "^14.0.0",
     "eslint-plugin-filenames": "^1.2.0",
     "husky": "^0.14.3",
@@ -93,7 +102,8 @@
     "rollup-plugin-istanbul": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "semantic-release": "^8.2.0",
-    "simple-assert": "^1.0.0"
+    "simple-assert": "^1.0.0",
+    "typescript": "^3.9.3"
   },
   "engines": {
     "node": ">=4"

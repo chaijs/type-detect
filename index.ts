@@ -26,6 +26,7 @@ const stringIteratorExists = symbolIteratorExists && typeof String.prototype[Sym
 const stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
 const toStringLeftSliceLength = 8;
 const toStringRightSliceLength = -1;
+
 /**
  * ### typeOf (obj)
  *
@@ -36,7 +37,7 @@ const toStringRightSliceLength = -1;
  * @return {String} object type
  * @api public
  */
-export default function typeDetect(obj) {
+export default function typeDetect(obj: unknown): string {
   /* ! Speed optimisation
    * Pre:
    *   string literal     x 3,039,035 ops/sec ±1.62% (78 runs sampled)
@@ -229,7 +230,7 @@ export default function typeDetect(obj) {
   *   Int8Array          x 6,606,078 ops/sec ±1.74% (81 runs sampled)
   *   Uint8ClampedArray  x 6,602,224 ops/sec ±1.77% (83 runs sampled)
   */
-  const stringTag = (symbolToStringTagExists && obj[Symbol.toStringTag]);
+  const stringTag = (symbolToStringTagExists && (obj as any)[Symbol.toStringTag]);
   if (typeof stringTag === 'string') {
     return stringTag;
   }
