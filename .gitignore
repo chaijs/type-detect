@@ -21,3 +21,8 @@ coverage/
 type-detect.js
 type-detect.test.js
 .nyc_output
+
+index.js
+*.d.ts
+
+test/deno-test.js

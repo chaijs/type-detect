@@ -5,7 +5,7 @@
 </h1>
 <br>
 <p align=center>
-  Improved typeof detection for <a href="http://nodejs.org">node</a> and the browser.
+  Improved typeof detection for <a href="https://nodejs.org">node</a>, <a href="https://deno.land/">, and the browser.
 </p>
 
 <p align=center>
@@ -96,6 +96,14 @@ Sadly, `Object.prototype.toString` is slow, and buggy. By slow - we mean it is s
 `type-detect` is available on [npm](http://npmjs.org). To install it, type:
 
     $ npm install type-detect
+
+### Deno
+
+`type-detect` can be imported with the following line:
+
+```js
+import type from 'https://deno.land/x/type_detect@v4.1.0/index.ts'
+```
 
 ### Browsers
 

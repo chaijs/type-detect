@@ -5,8 +5,22 @@
  */
 const promiseExists = typeof Promise === 'function';
 
-/* eslint-disable no-undef */
-const globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
+const globalObject = ((Obj) => {
+  if (typeof globalThis === 'object') {
+    return globalThis; // eslint-disable-line
+  }
+  Object.defineProperty(Obj, 'typeDetectGlobalObject', {
+    get() {
+      return this;
+    },
+    configurable: true,
+  });
+  // @ts-ignore
+  const global = typeDetectGlobalObject; // eslint-disable-line
+  // @ts-ignore
+  delete Obj.typeDetectGlobalObject;
+  return global;
+})(Object.prototype);
 
 const symbolExists = typeof Symbol !== 'undefined';
 const mapExists = typeof Map !== 'undefined';
@@ -26,6 +40,7 @@ const stringIteratorExists = symbolIteratorExists && typeof String.prototype[Sym
 const stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
 const toStringLeftSliceLength = 8;
 const toStringRightSliceLength = -1;
+
 /**
  * ### typeOf (obj)
  *
@@ -36,7 +51,7 @@ const toStringRightSliceLength = -1;
  * @return {String} object type
  * @api public
  */
-export default function typeDetect(obj) {
+export default function typeDetect(obj: unknown): string {
   /* ! Speed optimisation
    * Pre:
    *   string literal     x 3,039,035 ops/sec ±1.62% (78 runs sampled)
@@ -109,7 +124,7 @@ export default function typeDetect(obj) {
      *  - IE <=11 === "[object Object]"
      *  - IE Edge <=13 === "[object Object]"
      */
-    if (typeof window.location === 'object' && obj === window.location) {
+    if (typeof (window as any).location === 'object' && obj === (window as any).location) {
       return 'Location';
     }
 
@@ -132,19 +147,19 @@ export default function typeDetect(obj) {
      *  - IE 11 === "[object HTMLDocument]"
      *  - IE Edge <=13 === "[object HTMLDocument]"
      */
-    if (typeof window.document === 'object' && obj === window.document) {
+    if (typeof (window as any).document === 'object' && obj === (window as any).document) {
       return 'Document';
     }
 
-    if (typeof window.navigator === 'object') {
+    if (typeof (window as any).navigator === 'object') {
       /* ! Spec Conformance
        * (https://html.spec.whatwg.org/multipage/webappapis.html#mimetypearray)
        * WhatWG HTML$8.6.1.5 - Plugins - Interface MimeTypeArray
        * Test: `Object.prototype.toString.call(navigator.mimeTypes)``
        *  - IE <=10 === "[object MSMimeTypesCollection]"
        */
-      if (typeof window.navigator.mimeTypes === 'object' &&
-          obj === window.navigator.mimeTypes) {
+      if (typeof (window as any).navigator.mimeTypes === 'object' &&
+          obj === (window as any).navigator.mimeTypes) {
         return 'MimeTypeArray';
       }
 
@@ -154,22 +169,22 @@ export default function typeDetect(obj) {
        * Test: `Object.prototype.toString.call(navigator.plugins)``
        *  - IE <=10 === "[object MSPluginsCollection]"
        */
-      if (typeof window.navigator.plugins === 'object' &&
-          obj === window.navigator.plugins) {
+      if (typeof (window as any).navigator.plugins === 'object' &&
+          obj === (window as any).navigator.plugins) {
         return 'PluginArray';
       }
     }
 
-    if ((typeof window.HTMLElement === 'function' ||
-        typeof window.HTMLElement === 'object') &&
-        obj instanceof window.HTMLElement) {
+    if ((typeof (window as any).HTMLElement === 'function' ||
+        typeof (window as any).HTMLElement === 'object') &&
+        obj instanceof (window as any).HTMLElement) {
       /* ! Spec Conformance
       * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
       * WhatWG HTML$4.4.4 - The `blockquote` element - Interface `HTMLQuoteElement`
       * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
       *  - IE <=10 === "[object HTMLBlockElement]"
       */
-      if (obj.tagName === 'BLOCKQUOTE') {
+      if ((obj as any).tagName === 'BLOCKQUOTE') {
         return 'HTMLQuoteElement';
       }
 
@@ -185,7 +200,7 @@ export default function typeDetect(obj) {
        *  - Firefox === "[object HTMLTableCellElement]"
        *  - Safari === "[object HTMLTableCellElement]"
        */
-      if (obj.tagName === 'TD') {
+      if ((obj as any).tagName === 'TD') {
         return 'HTMLTableDataCellElement';
       }
 
@@ -201,7 +216,7 @@ export default function typeDetect(obj) {
        *  - Firefox === "[object HTMLTableCellElement]"
        *  - Safari === "[object HTMLTableCellElement]"
        */
-      if (obj.tagName === 'TH') {
+      if ((obj as any).tagName === 'TH') {
         return 'HTMLTableHeaderCellElement';
       }
     }
@@ -229,7 +244,7 @@ export default function typeDetect(obj) {
   *   Int8Array          x 6,606,078 ops/sec ±1.74% (81 runs sampled)
   *   Uint8ClampedArray  x 6,602,224 ops/sec ±1.77% (83 runs sampled)
   */
-  const stringTag = (symbolToStringTagExists && obj[Symbol.toStringTag]);
+  const stringTag = (symbolToStringTagExists && (obj as any)[Symbol.toStringTag]);
   if (typeof stringTag === 'string') {
     return stringTag;
   }
