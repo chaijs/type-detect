@@ -5,7 +5,7 @@
 </h1>
 <br>
 <p align=center>
-  Improved typeof detection for <a href="https://nodejs.org">node</a>, <a href="https://deno.land/">, and the browser.
+  Improved typeof detection for <a href="https://nodejs.org">Node.js</a>, <a href="https://deno.land/">Deno</a>, and the browser.
 </p>
 
 <p align=center>
