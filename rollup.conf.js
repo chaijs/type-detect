@@ -1,6 +1,6 @@
 import coverage from 'rollup-plugin-istanbul';
-import common from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
+import common from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 import transform from 'rollup-plugin-buble';
 import nyc from 'nyc';
 const Instrumenter = (new (new nyc)._instrumenterLib.istanbul).createInstrumenter; // eslint-disable-line
