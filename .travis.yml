@@ -35,18 +35,22 @@ jobs:
         - SAUCE_USERNAME="chaijs-type-detect"
         - SAUCE_CONNECT_READY_FILE=/tmp/sauce-connect-ready
     - stage: test
-      node_js: 8 # to be removed 2019-12-01
+      node_js: 10
       script: npm run test:node
     - stage: test
-      node_js: 7 # to be removed 2017-06-30
+      node_js: 12
       before_install: npm i -g npm@5
       script: npm run test:node
     - stage: test
-      node_js: 6 # to be removed 2019-04-01
+      node_js: 14
       before_install: npm i -g npm@5
       script: npm run test:node
     - stage: test
-      node_js: 4 # to be removed 2018-04-01
+      node_js: 15
+      before_install: npm i -g npm@5
+      script: npm run test:node
+    - stage: test
+      node_js: 16
       before_install: npm i -g npm@5
       script: npm run test:node
     - stage: test
