@@ -21,10 +21,10 @@
       src="https://img.shields.io/npm/v/type-detect.svg?style=flat-square"
     />
   </a>
-  <a href="https://travis-ci.org/chaijs/type-detect">
+  <a href="https://github.com/chaijs/type-detect">
     <img
       alt="build:?"
-      src="https://img.shields.io/travis/chaijs/type-detect/master.svg?style=flat-square"
+      src="https://github.com/chaijs/type-detect/workflows/Build/badge.svg"
     />
   </a>
   <a href="https://coveralls.io/r/chaijs/type-detect">
