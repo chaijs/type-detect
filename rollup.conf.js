@@ -1,7 +1,7 @@
 import coverage from 'rollup-plugin-istanbul';
-import common from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
-import transform from 'rollup-plugin-buble';
+import common from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import transform from '@rollup/plugin-buble';
 const env = process.env.NODE_ENV || 'test'; // eslint-disable-line no-process-env
 const plugins = [ common(), resolve(), transform() ];
 if (env === 'test') {
