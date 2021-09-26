@@ -17,7 +17,7 @@ if (process.env.SAUCE_USERNAME) {
   startConnect = true;
 } else if (process.env.APPVEYOR) {
   browsers = [ 'Firefox', 'ChromeHeadless', 'IE' ];
-} else if (process.env.TRAVIS) {
+} else if (process.env.CI) {
   browsers = [ 'FirefoxHeadless', 'ChromeHeadlessNoSandbox' ];
 } else if (!process.env.KARMA_MANUAL) {
   browsers = [];
@@ -28,12 +28,6 @@ if (process.env.APPVEYOR) {
   branch = process.env.APPVEYOR_REPO_BRANCH;
   build = `appveyor@${ process.env.APPVEYOR_JOB_NUMBER }`;
   job = process.env.APPVEYOR_JOB_NUMBER;
-} else if (process.env.TRAVIS) {
-  branch = process.env.TRAVIS_BRANCH;
-  build = `travis@${ process.env.TRAVIS_JOB_NUMBER }`;
-  job = process.env.TRAVIS_JOB_NUMBER;
-  // Travis has its own saucelabs connect process, so ensure karma won't run it
-  startConnect = false;
 }
 /* eslint-enable */
 
