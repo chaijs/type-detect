@@ -283,12 +283,9 @@ describeIf(typeof window !== 'undefined' && typeof window.document !== 'undefine
       assert(type(document.createElement('Caption')) === 'HTMLTableCaptionElement');
     });
 
-    it('HTMLTableDataCellElement', () => {
-      assert(type(document.createElement('TD')) === 'HTMLTableDataCellElement');
-    });
-
-    it('HTMLTableHeaderCellElement', () => {
-      assert(type(document.createElement('TH')) === 'HTMLTableHeaderCellElement');
+    it('HTMLTableCellElement', () => {
+      assert(type(document.createElement('TD')) === 'HTMLTableCellElement');
+      assert(type(document.createElement('TH')) === 'HTMLTableCellElement');
     });
 
     it('HTMLTableColElement', () => {
