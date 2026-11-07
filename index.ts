@@ -187,38 +187,6 @@ export default function typeDetect(obj: unknown): string {
       if ((obj as any).tagName === 'BLOCKQUOTE') {
         return 'HTMLQuoteElement';
       }
-
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/#htmltabledatacellelement)
-       * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableDataCellElement`
-       * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-       *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
-       *       which suggests that browsers should use HTMLTableCellElement for
-       *       both TD and TH elements. WhatWG separates these.
-       * Test: Object.prototype.toString.call(document.createElement('td'))
-       *  - Chrome === "[object HTMLTableCellElement]"
-       *  - Firefox === "[object HTMLTableCellElement]"
-       *  - Safari === "[object HTMLTableCellElement]"
-       */
-      if ((obj as any).tagName === 'TD') {
-        return 'HTMLTableDataCellElement';
-      }
-
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/#htmltableheadercellelement)
-       * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableHeaderCellElement`
-       * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-       *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
-       *       which suggests that browsers should use HTMLTableCellElement for
-       *       both TD and TH elements. WhatWG separates these.
-       * Test: Object.prototype.toString.call(document.createElement('th'))
-       *  - Chrome === "[object HTMLTableCellElement]"
-       *  - Firefox === "[object HTMLTableCellElement]"
-       *  - Safari === "[object HTMLTableCellElement]"
-       */
-      if ((obj as any).tagName === 'TH') {
-        return 'HTMLTableHeaderCellElement';
-      }
     }
   }
 
